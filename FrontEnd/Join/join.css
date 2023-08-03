@@ -12,9 +12,8 @@ body{
 }
 
 .container{
-    position: relative;
     width: 360px;
-    height: 207px;
+    height: 307px;
     background-color: white;
     border-radius: 3%;
     /* justify-content: center; */
@@ -27,8 +26,8 @@ body{
 }
 
 .event-box{
-    padding-right: 225px;
-    padding-top: 7px;
+    width: 100%;
+    border: 2px black solid;
 }
 
 .event-box>div{
@@ -42,23 +41,29 @@ body{
 
 .place{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
 }
 
-.date{
+.time-box{
+    border: 2px black solid;
     display: flex;
-    justify-content: center;
+    width: 100%;
+    justify-content: space-between;
 }
 
-.time{
-    display: flex;
-    justify-content: center;
+.date-time{
+    margin-left: 40px;
+}
+
+.meeting-time{
+    color: blue;
 }
 
 .my-btn{
     display: flex;
     justify-content: end;
     padding-right: 15px;
+    margin-left: 10px;
 }
 
 button{
@@ -69,3 +74,6 @@ button{
     border-radius: 6px;
 }
 
+.input{
+    width: 35%;
+}

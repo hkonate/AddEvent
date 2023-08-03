@@ -21,22 +21,24 @@
     background-image: url(/AddEvent/FrontEnd/img/Event1.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    width: 50%;
+    transition: width 2s; /* Utilisez une transition pour la largeur */
 }
 
-.left:hover{
-    transition: 1s ease-in-out;
-    transform: scale(1.5);   
+.left:hover {
+    width: 110%; /* Lors du survol, augmentez la largeur */
 }
 
 .right {
     background-image: url(/AddEvent/FrontEnd/img/Event2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    width: 50%;
+    transition: width 2s; /* Utilisez une transition pour la largeur */
 }
 
-.right:hover{
-    transition: 1s ease-in-out;
-    transform: scale(1.5); 
+.right:hover {
+    width: 110%; /* Lors du survol, augmentez la largeur */
 }
 
 h1 {

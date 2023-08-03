@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./join.css">
     <script defer src="./join.js"></script>
+    
     <title>Join Event</title>
 </head>
 <body>
@@ -19,17 +20,28 @@
             <div class="place">
                 <h3>Lieu:</h3>
             </div>
-            <div class="date">
-                <h3>Date:</h3>
+                <div class="time-box">
+                    <div class="date-time">
+                        <h3>Date et Heure:</h3>
+                    </div>
+                <div class="meeting-time">
+                    <input
+                        type="datetime-local"
+                        id="meeting-times"
+                        name="meeting-time"
+                        value="2018-06-12T19:30"
+                        min="2018-06-07T00:00"
+                        max="2018-06-14T00:00"
+                        />  
+                </div>
             </div>
-            <div class="time">
-                <h3>Heure:</h3>
-            </div>
+
         </div>
+        
         <div class="my-btn">
+            <input class="input" type="text">
             <button class="the-btn">Je participe</button>
         </div>
-    </div>
-    
+    </div>   
 </body>
 </html>
