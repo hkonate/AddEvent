@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(18, 11, 151);
+    background: linear-gradient(90deg, rgba(129, 42, 10, 0.873) 0%, rgba(121, 42, 9, 0.851) 35%, rgb(255, 60, 0) 100%);
+}
+
+.container{
+    width: 360px;
+    height: 307px;
+    background-color: white;
+    border-radius: 3%;
+    /* justify-content: center; */
+    
+}
+
+.title{
+    padding-top: 12px;
+    padding-left: 20px;
+}
+
+.event-box{
+    width: 100%;
+    border: 2px black solid;
+}
+
+.event-box>div{
+    padding-top: 7px;
+}
+
+.event-title{
+    display: flex;
+    justify-content: center;
+}
+
+.place{
+    display: flex;
+    justify-content: space-around;
+}
+
+.time-box{
+    border: 2px black solid;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.date-time{
+    margin-left: 40px;
+}
+
+.meeting-time{
+    color: blue;
+}
+
+.my-btn{
+    display: flex;
+    justify-content: end;
+    padding-right: 15px;
+    margin-left: 10px;
+}
+
+button{
+    background-color: rgb(69, 177, 230);
+    height: 22px;
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+}
+
+.input{
+    width: 35%;
+}

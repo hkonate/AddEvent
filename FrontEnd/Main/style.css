@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+}
+
+
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.half-container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.left {
+    background-image: url(/AddEvent/FrontEnd/img/Event1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 50%;
+    transition: width 2s; /* Utilisez une transition pour la largeur */
+}
+
+.left:hover {
+    width: 110%; /* Lors du survol, augmentez la largeur */
+}
+
+.right {
+    background-image: url(/AddEvent/FrontEnd/img/Event2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 50%;
+    transition: width 2s; /* Utilisez une transition pour la largeur */
+}
+
+.right:hover {
+    width: 110%; /* Lors du survol, augmentez la largeur */
+}
+
+h1 {
+    font-size: 30px;
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./create.css">
+    <script defer src="./create.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Créer mon évènement</h1>
+    <form class="container">
+        <div class="event-box">
+            <div class="title">
+                <h2>Titre:</h2>
+                <input id="text" type="text">
+            </div>
+            <div class="place">
+                <h2>Lieu:</h2>
+                <input type="text">
+            </div>
+            <div class="date-time">
+                <h2>Date et heure:</h2>
+                <input
+                        type="datetime-local"
+                        id="dt"
+                        name="meeting-time"
+                        />
+            </div>
+            <div class="my-ipt">
+                <input type="submit" value="Valider">
+            </div>
+        </div>    
+    </form>
+</body>
+</html>
