@@ -6,9 +6,10 @@ router.post("/event/create", async (req, res) => {
   try {
     if (
       !req.body ||
-      (req.body && Object.keys(req.body).length !== 2) ||
+      (req.body && Object.keys(req.body).length !== 3) ||
       typeof req.body.title !== "string" ||
-      typeof req.body.place !== "string"
+      typeof req.body.place !== "string" ||
+      typeof req.body.date !== "string"
     )
       throw new Error("Wrong request");
 
@@ -50,6 +51,35 @@ router.post("/event/attend/:id", async (req, res) => {
       }
     }
     const result = await event.save();
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({
+      error: error.message,
+    });
+  }
+});
+
+router.get("/events", async (req, res) => {
+  try {
+    const result = await Event.find();
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({
+      error: error.message,
+    });
+  }
+});
+
+router.delete("/event/delete/:id", async (req, res) => {
+  try {
+    if (!req.params.id || (req.params.id && typeof req.params.id !== "string"))
+      throw new Error("Wrong request");
+    console.log(req.params.id);
+    const result = await Event.findByIdAndDelete(req.params.id);
+    console.log(result);
+    if (!result) {
+      throw new Error("Wrong request");
+    }
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({
