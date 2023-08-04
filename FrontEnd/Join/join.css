@@ -16,11 +16,13 @@ body{
 
 .container{
     width: 25%;
-    height: 40%;
+    height: 55%;
     background-color: white;
     border-radius: 7px;
     margin-top: 5px;
     margin-left: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     background: rgb(18, 11, 151);
     background-color: rgba(0, 0, 0, 0.5);
 }
@@ -39,9 +41,9 @@ h1{
 
 .title{
     display: flex;
-    justify-content: start;
+    gap: 20px;
+    align-items: center;
     padding-top: 40px;
-    padding-left: 20px;
     color: rgba(240, 240, 240, 0.99);
 }
 
@@ -51,17 +53,25 @@ h1{
 
 .place{
     display: flex;
-    justify-content: start;
+    gap: 20px;
+    align-items: center;
     padding-top: 40px;
-    padding-left: 20px;
     color: rgba(240, 240, 240, 0.99);
 }
 
-.date-time{
+.date{
     display: flex;
-    justify-content: start;
+    gap: 20px;
+    align-items: center;
     padding-top: 40px;
-    padding-left: 20px;
+    color: rgba(240, 240, 240, 0.99);
+}
+
+.time{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    padding-top: 40px;
     color: rgba(240, 240, 240, 0.99);
 }
 
@@ -86,4 +96,8 @@ button{
 
 .input{
     width: 35%;
+}
+
+.hide{
+    display: none;
 }
