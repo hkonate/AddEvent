@@ -1,0 +1,98 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+}
+
+.home-page{
+    width: 100%;
+    height: 5%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.home-page-btn{
+    width: 20%;
+    height: 100%;
+    border: none;
+    font-size: 23px;
+    background: none;
+    color: white;
+    transition: 3s;
+}
+
+:root {
+    --hover: #ffffff;
+}
+
+.home-page-btn:hover{
+    box-shadow: inset 20em 0 0 0 var(--hover);
+    color: black;
+}
+
+.profile-box{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.presentation-of-user{
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.profile-box button{
+    height: 10%;
+    width: 50%;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.profile-box button:hover{
+    background-color: black;
+    color: white;
+}
+
+.user-presentation{
+    width: 70%;
+    padding-right: 25rem;
+    word-wrap: break-word;
+}
+
+.validation{
+    margin-top: 2rem;
+    margin-left: 1rem;
+}
+
+.hide{
+    transform: scale(0);
+    opacity: 0;
+    display: none;
+}
+
+.presentation-of-user, .lname, .fname, .age, .interest {
+    width: auto; /* Par défaut, les champs d'entrée ont une largeur automatique */
+}
+
+.visibles{
+    animation: visible 1s forwards;
+}
+
+@keyframes visible{
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.description-value, .lname-value, .fname-value, .age-value, .interest-value {
+    margin-left: 5px; /* Espace entre ":" et la valeur */
+    color: red;
+    font-family: sans-serif;
+    font-weight: bold;
+}

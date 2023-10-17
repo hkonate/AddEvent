@@ -1,0 +1,35 @@
+const homeBtn = document.querySelector(".home-page-btn");
+const validBtn = document.querySelector(".modifbtn");
+const hideBtn = document.querySelectorAll(".hide");
+const valuesToDisplay = document.querySelectorAll(".description-value, .lname-value, .fname-value, .age-value, .interest-value");
+let changesApplied = false;
+
+homeBtn.addEventListener('click', () => {
+    window.location = "../Main/index.html";
+});
+
+validBtn.addEventListener('click', () => {
+    console.log("bonjour");
+    if (!changesApplied) {
+        valuesToDisplay.forEach((value, index) => {
+            value.textContent = hideBtn[index].value;
+            value.classList.add('visibles');
+        });
+        hideBtn.forEach((element) => {
+            element.classList.remove('hide');
+        })
+        validBtn.textContent = "Valider mes changements";
+        changesApplied = true;
+    } else {
+        valuesToDisplay.forEach((value, index) => {
+            value.textContent = hideBtn[index].value;
+            value.classList.remove('visibles');
+        });
+        hideBtn.forEach((element) => {
+            element.classList.add('hide');
+        })
+        validBtn.textContent = "Modifier mon profil";
+        changesApplied = false;
+    }
+    console.log("bonjour2");
+});

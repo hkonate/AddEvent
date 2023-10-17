@@ -3,10 +3,8 @@
 }
 
 body{
-    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
     background: rgb(18, 11, 151);
     background: linear-gradient(90deg, rgba(129, 42, 10, 0.873) 0%, rgba(121, 42, 9, 0.851) 35%, rgb(255, 60, 0) 100%);
     justify-content: center;
@@ -14,15 +12,19 @@ body{
     align-items: center;
 }
 
+.event{
+    width: 1200px;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .container{
-    width: 25%;
-    height: 55%;
-    background-color: white;
+    height: 100%;
+    margin-bottom: 10px;
     border-radius: 7px;
-    margin-top: 5px;
-    margin-left: 20px;
     padding-left: 20px;
-    padding-right: 20px;
     background: rgb(18, 11, 151);
     background-color: rgba(0, 0, 0, 0.5);
 }
@@ -36,44 +38,19 @@ h1{
     font-size: 15px;
     padding-left: 7px; 
     display: flex;
-    flex-direction: column;
-}
-
-.title{
-    display: flex;
     gap: 20px;
     align-items: center;
     padding-top: 40px;
     color: rgba(240, 240, 240, 0.99);
 }
+
+
 
 #text{
     margin-right: 2px;
 }
 
-.place{
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    padding-top: 40px;
-    color: rgba(240, 240, 240, 0.99);
-}
 
-.date{
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    padding-top: 40px;
-    color: rgba(240, 240, 240, 0.99);
-}
-
-.time{
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    padding-top: 40px;
-    color: rgba(240, 240, 240, 0.99);
-}
 
 #dt{
     margin-right: 28px;
