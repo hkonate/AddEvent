@@ -11,44 +11,65 @@
     <section>
         <div class="form-box">
             <div class="form-value">
-                <form action="">
+                <form action="" method="POST">
                     <h2>S'inscrire</h2>
                     <div class="inputbox">
                         <div class="nom">
                             <ion-icon name="person-circle-outline"></ion-icon>
-                            <input type="text" required>
-                            <label for="">Votre nom</label>
+                            <input class="nomm" id="nomid" type="text" required>
+                            <label for="nomid">Votre nom</label>
+                            <p class="error-msg" id="nom-error-message"></p>
                         </div>
                     </div>
                     <div class="inputbox">
                         <div class="prenom">
                             <ion-icon name="person-circle-outline"></ion-icon>
-                            <input type="text" required>
-                            <label for="">Votre prénom</label>
+                            <input class="prenomm" id="prenomid" type="text" required>
+                            <label for="prenomid">Votre prénom</label>
+                            <p class="error-msg" id="nom-error-message"></p>
+                        </div>
+                    </div>
+                    <div class="inputbox">
+                        <div class="pseudo">
+                            <ion-icon name="happy-outline"></ion-icon>
+                            <input class="pseudoo" id="pseudoid" type="text" required>
+                            <label for="pseudoid">Votre pseudo</label>
+                            <p class="error-msg" id="nom-error-message"></p>
+                        </div>
+                    </div>
+                    <div class="inputbox">
+                        <div class="phone">
+                            <ion-icon name="call-outline"></ion-icon>
+                            <input class="phonee" id="phoneid" type="text" required>
+                            <label for="phoneid">Votre numéro de téléphone</label>
+                            <p class="error-msg" id="nom-error-message"></p>
                         </div>
                     </div>
                     <div class="inputbox">
                         <div class="email">
-                            <ion-icon name="mail-outline"></ion-icon>
-                            <input type="email" required>
-                            <label for="">Email</label>
+                            <ion-icon name="at-outline"></ion-icon>
+                            <input class="emaill" id="emailid" type="email" required>
+                            <label for="emailid">Email</label>
+                            <p class="error-msg" id="nom-error-message"></p>
                         </div>
                     </div>
                     <div class="inputbox">
                         <div class="mdp">
                             <ion-icon id="locklogo" name="lock-closed-outline"></ion-icon>
-                            <input type="password" required>
-                            <label for="">Mot de passe</label>
+                            <input class="mdpp" id="mdpid" type="password" required>
+                            <label for="mdpid">Mot de passe</label>
+                            <p class="error-msg" id="nom-error-message"></p>
                         </div>
                     </div>
                     <div class="inputbox">
                         <div class="mdpconfirm">
                             <ion-icon id="locklogo" name="lock-closed-outline"></ion-icon>
-                            <input type="password" required>
-                            <label for="">Confirmez votre mot de passe</label>
+                            <input class="mdpconfirmm" id="mdpconfirmid" type="password" required>
+                            <label for="mdpconfirmid">Confirmez votre mot de passe</label>
+                            <p class="error-msg" id="nom-error-message"></p>
                         </div>
                     </div>
-                    <button>Inscription</button>
+                    <button class="validation-btn">Inscription</button>
                 </form>
             </div>
         </div>

@@ -6,6 +6,7 @@
 .container{
     width: 100%;
     height: 100vh;
+    background-color: beige;
 }
 
 .home-page{
@@ -14,6 +15,10 @@
     background-color: black;
     display: flex;
     justify-content: center;
+}
+
+h3{
+    color: black;
 }
 
 .home-page-btn{
@@ -36,13 +41,16 @@
 }
 
 .profile-box{
-    background-color: white;
     display: flex;
     justify-content: space-between;
 }
 
 .profile-box img{
-    margin-left: -2.9rem;
+    margin-top: 3.5rem;
+    margin-left: 0.8rem;
+    border-radius: 50%;
+    width: 25%;
+    height: auto;
 }
 
 .presentation-of-user{
@@ -52,25 +60,21 @@
 
 .profile-box button{
     height: 10%;
-    width: 50%;
+    width: 30%;
     margin-right: 0.5rem;
-    margin-top: 0.5rem;
-}
-
-.profile-box button:hover{
-    background-color: black;
-    color: white;
+    margin-top: 3.5rem;
 }
 
 .user-presentation{
     width: 70%;
+    margin-left: 2rem;
     padding-right: 25rem;
     word-wrap: break-word;
 }
 
 .user-presentation h3{
-    margin-top: 3.5rem;
-    padding-bottom: 1rem;
+    margin-top: 3.3rem;
+    padding-bottom: 0.5rem;
 }
 
 .validation{
@@ -100,10 +104,14 @@
 }
 
 .description-value, .lname-value, .fname-value, .age-value, .interest-value {
-    margin-left: 5px; /* Espace entre ":" et la valeur */
-    color: red;
+    margin-left: 0; /* Espace entre ":" et la valeur */
+    color: black;
     font-family: sans-serif;
     font-weight: bold;
+}
+
+.user-information{
+    margin-top: 2rem;
 }
 
 .user-information h3{

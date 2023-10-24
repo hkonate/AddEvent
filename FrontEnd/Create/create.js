@@ -10,7 +10,7 @@ button.addEventListener("click",(event) => {
     
     try {
         
-        fetch("http://localhost:3000/event/create", {
+        fetch("https://social-gather-production.up.railway.app/event/create", {
     
             method: "POST",
             
@@ -25,6 +25,7 @@ button.addEventListener("click",(event) => {
         }).then(response => response.json())
  
         .then(json => console.log(json));
+        
     } catch (error) {
         console.log(error.message);
     }

@@ -23,7 +23,7 @@ console.log(attend, JSON.parse(localStorage.getItem(`user${i}`)));
  
     try {
         
-        fetch(`http://localhost:3000/event/attend/${json[i]._id}`,{
+        fetch(`https://social-gather-production.up.railway.app/event/attend/${json[i]._id}`,{
             method: 'POST',
             body:JSON.stringify({
                 name: inputList[i].value,
@@ -45,7 +45,7 @@ console.log(attend, JSON.parse(localStorage.getItem(`user${i}`)));
 
 try {
 
-    fetch("http://localhost:3000/events" )
+    fetch("https://social-gather-production.up.railway.app/event" )
     .then(response => response.json())
     .then(json => {
         console.log(json);
