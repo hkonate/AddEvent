@@ -33,3 +33,7 @@ validBtn.addEventListener('click', () => {
     }
     console.log("bonjour2");
 });
+
+if(localStorage.getItem("monCookie") === null){
+    window.location = "../mainomain/mainomain.html";
+};

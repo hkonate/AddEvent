@@ -30,3 +30,7 @@ button.addEventListener("click",(event) => {
         console.log(error.message);
     }
 })
+
+if(localStorage.getItem("monCookie") === null){
+    window.location = "../mainomain/mainomain.html";
+};

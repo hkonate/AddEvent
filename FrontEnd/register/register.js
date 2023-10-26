@@ -7,6 +7,11 @@ const password = document.querySelector(".mdpp");
 const passwordConfirm = document.querySelector(".mdpconfirmm");
 const validationBtn = document.querySelector(".validation-btn");
 const nomErrorMessage = document.getElementById("nom-error-message");
+const prenomErrorMessage = document.getElementById("prenom-error-message");
+const pseudoErrorMessage = document.getElementById("pseudo-error-message");
+const phoneErrorMessage = document.getElementById("phone-error-message");
+const emailErrorMessage = document.getElementById("email-error-message");
+const locklogo = document.getElementById("locklogo");
 
 let thePassword = password.value;
 let passwordConfirmation = passwordConfirm.value;
@@ -38,6 +43,20 @@ const validPassword = () => {
     
 }
 
+const togglePassword = () => { 
+    const passwordField = document.getElementById("passwordField");
+
+    if (passwordField.type === "password" || passwordConfirm.type === "password"){
+        passwordField.type = "text"; //Affiche le mot de passe
+        passwordConfirm.type = "text";
+        locklogo.name = "lock-open-outline";
+    } else {
+        passwordField.type = "password"; //Masque le mot de passe
+        passwordConfirm.type = "password";
+        locklogo.name = "lock-closed-outline";
+    }
+}
+
 
 const verifyForm = (str, errorMessageElement) =>{
     console.log("tu es bien ici");
@@ -47,7 +66,7 @@ const verifyForm = (str, errorMessageElement) =>{
         console.log("tu es dans le if");
         return false;
     }
-    // errorMessageElement.textContent = "";
+    errorMessageElement.textContent = "";
     return true;
 };
 
@@ -57,10 +76,10 @@ validationBtn.addEventListener('click',(event) => {
 
     const isPasswordValid = validPassword();
     const isLnameValid = verifyForm(lname.value, nomErrorMessage);
-    const isFnameValie = verifyForm(fname.value);
-    const isPseudoValid = verifyForm(pseudo.value);
-    const isPhoneValid = verifyForm(phone.value);
-    const isEmailValid = verifyForm(email.value);
+    const isFnameValie = verifyForm(fname.value, prenomErrorMessage);
+    const isPseudoValid = verifyForm(pseudo.value, pseudoErrorMessage);
+    const isPhoneValid = verifyForm(phone.value, phoneErrorMessage);
+    const isEmailValid = verifyForm(email.value, emailErrorMessage);
 
     if (isPasswordValid && isLnameValid && isFnameValie && isPseudoValid && isPhoneValid && isEmailValid){
         try{
@@ -86,6 +105,9 @@ validationBtn.addEventListener('click',(event) => {
         })
         .then(text => {
             console.log(text);
+        })
+        .then(data => {
+            window.location = "../mainomain/mainomain.html";
         })
     } catch (error) {
         console.log(error.message);

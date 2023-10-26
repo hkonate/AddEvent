@@ -111,7 +111,9 @@ let eventResponse;
     
 }
 
-
+if(localStorage.getItem("monCookie") === null){
+    window.location = "../mainomain/mainomain.html";
+}
 
 
 

@@ -1,4 +1,5 @@
 const leftAndRight = document.querySelectorAll(".container>div");
+const deconnectionBtn = document.querySelector(".deconnexionbtn");
 
 
 for (const div of leftAndRight){
@@ -10,4 +11,15 @@ for (const div of leftAndRight){
         }
        
     })
+};
+
+deconnectionBtn.addEventListener("click", () => {
+    localStorage.removeItem("monCookie")
+    window.location = "../mainomain/mainomain.html";
+})
+
+if(localStorage.getItem("monCookie") === null){
+    window.location = "../mainomain/mainomain.html";
 }
+
+console.log(localStorage.getItem("monCookie"));
