@@ -20,32 +20,22 @@ console.log(attend, JSON.parse(localStorage.getItem(`user${i}`)));
     localStorage.setItem(`user${i}`, JSON.stringify({
         attend
     }))
- 
-    try {
-        
-        fetch(`https://social-gather-production.up.railway.app/event/attend/${json[i]._id}`,{
-            method: 'POST',
-            body:JSON.stringify({
-                name: inputList[i].value,
-                attend
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        }).then(response => response.json()).then(json => console.log(json));
-
-    } catch (error) {
-       
-    }
 });
 
 }
 }
 
+const header = {
+    "Authorization": `Bearer ${localStorage.getItem("monCookie")}`,
+    "Content-type": "application/json; charset=UTF-8"
+}
 
 try {
 
-    fetch("https://social-gather-production.up.railway.app/event" )
+    fetch("https://social-gather-production.up.railway.app/event",{
+        method: "GET",
+        headers: header
+    })
     .then(response => response.json())
     .then(json => {
         console.log(json);
@@ -59,24 +49,24 @@ let eventResponse;
         let buttonList
 
         const eventsContainer = document.querySelector(".event");
-    for(i = 0; i < json.length; i++){
-        eventResponse = JSON.parse(localStorage.getItem(`event${i}`))
-            const tab = json[i].date.split("T");
-            const tab3 = tab[0].split("-").reverse();
-            const str2 = tab3.join("/");
-            const tab2 = tab[1].split(":");
-            const str = tab2[0] + "h" + tab2[1];
+            for(i = 0; i < json.length; i++){
+                eventResponse = JSON.parse(localStorage.getItem(`event${i}`))
+                const tab = json[i].schedule.split("T");
+                const tab3 = tab[0].split("-").reverse();
+                const str2 = tab3.join("/");
+                const tab2 = tab[1].split(":");
+                const str = tab2[0] + "h" + tab2[1];
            
-            const eventElement = document.createElement('div');
-            eventElement.innerHTML = `
-            <div class="container">
-                <div class="event-box">
-                    <h2>Titre:</h2>
-                    <p>${json[i].title}</p>
+                const eventElement = document.createElement('div');
+                eventElement.innerHTML = `
+                <div class="container">
+                    <div class="event-box">
+                        <h2>Titre:</h2>
+                        <p>${json[i].title}</p>
                 </div>
                 <div class="event-box">
                     <h2>Lieu:</h2>
-                    <p>${json[i].place}</p>
+                    <p>${json[i].address}</p>
                 </div>
                 <div class="event-box">
                     <h2>Date:</h2>
@@ -111,9 +101,7 @@ let eventResponse;
     
 }
 
-if(localStorage.getItem("monCookie") === null){
-    window.location = "../mainomain/mainomain.html";
-}
+
 
 
 

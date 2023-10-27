@@ -3,6 +3,12 @@ const validBtn = document.querySelector(".modifbtn");
 const hideBtn = document.querySelectorAll(".hide");
 const valuesToDisplay = document.querySelectorAll(".description-value, .lname-value, .fname-value, .age-value, .interest-value");
 let changesApplied = false;
+const deconnectionBtn = document.querySelector(".deconnexionbtn");
+
+deconnectionBtn.addEventListener("click", () => {
+    localStorage.removeItem("monCookie")
+    window.location = "../mainomain/mainomain.html";
+})
 
 homeBtn.addEventListener('click', () => {
     window.location = "../Main/index.html";
