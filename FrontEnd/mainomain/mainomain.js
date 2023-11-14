@@ -43,7 +43,8 @@ connectionButton.addEventListener('click', (event) => {
             })
             .then(text => {
                 console.log(text);
-                localStorage.setItem('monCookie', text);
+                localStorage.setItem('monCookie', JSON.stringify(text));
+                console.log(JSON.parse(localStorage.getItem("monCookie")));
             })
             .then(data => {
                 window.location = "../main/index.html";

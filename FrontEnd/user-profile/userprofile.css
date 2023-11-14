@@ -53,11 +53,6 @@ h3{
     height: auto;
 }
 
-.presentation-of-user{
-    margin-right: 0.5rem;
-    margin-bottom: 0.5rem;
-}
-
 .profile-box button{
     height: 10%;
     width: 30%;
@@ -77,6 +72,11 @@ h3{
     padding-bottom: 0.5rem;
 }
 
+.presentation-of-user{
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
 .validation{
     margin-top: 2rem;
     margin-left: 1rem;
@@ -88,7 +88,7 @@ h3{
     display: none;
 }
 
-.presentation-of-user, .lname, .fname, .age, .interest {
+.presentation-of-user, .pseudoo, .interest {
     width: auto; /* Par défaut, les champs d'entrée ont une largeur automatique */
 }
 
@@ -103,7 +103,7 @@ h3{
     }
 }
 
-.description-value, .lname-value, .fname-value, .age-value, .interest-value {
+.description-value, .pseudo-value, .interest-value {
     margin-left: 0; /* Espace entre ":" et la valeur */
     color: black;
     font-family: sans-serif;
