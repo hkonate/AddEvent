@@ -8,8 +8,9 @@
     <title>Document</title>
 </head>
 <body>
+    <button class="deconnexionbtn">deconnexion</button>
     <h1>Créer mon évènement</h1>
-    <form class="container">
+    <form class="container" method="POST">
         <div class="event-box">
             <div class="title">
                 <h2>Titre:</h2>
@@ -22,6 +23,14 @@
             <div class="date-time">
                 <h2>Date et heure:</h2>
                 <input type="datetime-local" id="dt" name="meeting-time"/>
+            </div>
+            <div class="description-of-event">
+                <h2>Description:</h2>
+                <input class="ipt-of-event-description" type="text">
+            </div>
+            <div class="inclusive-iptt">
+                <h2>Inclusive:</h2>
+                <input class="inclusive-ipt" type="text">
             </div>
             <div class="my-ipt">
                 <input type="submit" value="Valider">

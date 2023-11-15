@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/AddEvent/FrontEnd/register/register.css">
+    <title>Register page</title>
+</head>
+<body>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                <form action="" method="POST">
+                    <h2>S'inscrire</h2>
+                    <div class="inputbox">
+                        <div class="nom">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                            <input class="nomm" id="nomid" type="text" required>
+                            <label for="nomid">Votre nom</label>
+                            <p class="error-msg" id="nom-error-message"></p>
+                        </div>
+                    </div>
+                    <div class="inputbox">
+                        <div class="prenom">
+                            <ion-icon name="person-circle-outline"></ion-icon>
+                            <input class="prenomm" id="prenomid" type="text" required>
+                            <label for="prenomid">Votre prénom</label>
+                            <p class="error-msg" id="prenom-error-message"></p>
+                        </div>
+                    </div>
+                    <div class="inputbox">
+                        <div class="pseudo">
+                            <ion-icon name="happy-outline"></ion-icon>
+                            <input class="pseudoo" id="pseudoid" type="text" required>
+                            <label for="pseudoid">Votre pseudo</label>
+                            <p class="error-msg" id="pseudo-error-message"></p>
+                        </div>
+                    </div>
+                    <div class="inputbox">
+                        <div class="phone">
+                            <ion-icon name="call-outline"></ion-icon>
+                            <input class="phonee" id="phoneid" type="text" required>
+                            <label for="phoneid">Votre numéro de téléphone</label>
+                            <p class="error-msg" id="phone-error-message"></p>
+                        </div>
+                    </div>
+                    <div class="inputbox">
+                        <div class="email">
+                            <ion-icon name="at-outline"></ion-icon>
+                            <input class="emaill" id="emailid" type="email" required>
+                            <label for="emailid">Email</label>
+                            <p class="error-msg" id="email-error-message"></p>
+                        </div>
+                    </div>
+                    <div class="inputbox">
+                        <div class="mdp">
+                            <ion-icon id="locklogo" name="lock-closed-outline" onclick="togglePassword()"></ion-icon>
+                            <input class="mdpp" id="passwordField" type="password" required>
+                            <label for="passwordField">Mot de passe</label>
+                        </div>
+                    </div>
+                    <div class="inputbox">
+                        <div class="mdpconfirm">
+                            <ion-icon id="locklogo" name="lock-closed-outline" onclick="togglePassword()"></ion-icon>
+                            <input class="mdpconfirmm" id="passwordFieldConfirm" type="password" required>
+                            <label for="passwordFieldConfirm">Confirmez votre mot de passe</label>
+                        </div>
+                    </div>
+                    <button class="validation-btn">Inscription</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script src="/AddEvent/FrontEnd/register/register.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
