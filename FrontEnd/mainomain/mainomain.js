@@ -18,7 +18,7 @@ const seePassword = () => {
 
 gotomain.addEventListener("click", () => {
     window.location = "../main/index.html";
-    console.log("tu vvas dans le main");
+    console.log("tu vas dans le main");
 })
 
 connectionButton.addEventListener('click', (event) => {

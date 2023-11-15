@@ -1,10 +1,18 @@
+import jwt from "../node_modules/jsonwebtoken";
+
+// const token = jwt.sign({ foo: 'bar' }, 'secret-key');
+// console.log('JWT Token:', token);
+
+const userPayload = jwt.decode(JSON.parse(localStorage.getItem("monCookie")));
+console.log(userPayload);
+
 const handleClick = (buttonList, inputList, json) => {
     for (let i = 0; i < buttonList.length; i++){
 
     buttonList[i].addEventListener("click", () =>{
 
-    let {attend} = JSON.parse(localStorage.getItem(`user${i}`)) || false;
-console.log(attend, JSON.parse(localStorage.getItem(`user${i}`)));
+    let {attend} = JSON.parse(localStorage.getItem("monCookie")) || false;
+    console.log(attend, JSON.parse(localStorage.getItem(`user${i}`)));
     if(buttonList[i].innerText === 'Je participe'){
         buttonList[i].style.backgroundColor = 'red'
         buttonList[i].innerText = 'Je ne participe pas'
@@ -26,7 +34,7 @@ console.log(attend, JSON.parse(localStorage.getItem(`user${i}`)));
 }
 
 const header = {
-    "Authorization": `Bearer ${localStorage.getItem("monCookie")}`,
+    "Authorization": `Bearer ${JSON.parse(localStorage.getItem("monCookie"))}`,
     "Content-type": "application/json; charset=UTF-8"
 }
 
@@ -49,7 +57,7 @@ let eventResponse;
         let buttonList
 
         const eventsContainer = document.querySelector(".event");
-            for(i = 0; i < json.length; i++){
+            for(let i = 0; i < json.length; i++){
                 eventResponse = JSON.parse(localStorage.getItem(`event${i}`))
                 const tab = json[i].schedule.split("T");
                 const tab3 = tab[0].split("-").reverse();
@@ -93,12 +101,12 @@ let eventResponse;
                 inputList[i].classList.add('hide');
         }
         }
-        handleClick(buttonList, inputList,json);
+        handleClick(buttonList, inputList, json);
        
     });
 
 } catch (error) {
-    
+    console.log(error.message);
 }
 
 

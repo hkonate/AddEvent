@@ -1,6 +1,7 @@
 const leftAndRight = document.querySelectorAll(".container>div");
-const deconnectionBtn = document.querySelector(".deconnexionbtn");
-const userProfileDirection = document.querySelector(".profil-direction");
+const profilButton = document.querySelector(".profil-direction");
+const deconnexionButton = document.querySelector(".deconnexionbtn");
+const navBarLogo = document.getElementById("navbarlogo");
 
 
 for (const div of leftAndRight){
@@ -14,17 +15,26 @@ for (const div of leftAndRight){
     })
 };
 
-deconnectionBtn.addEventListener("click", () => {
-    localStorage.removeItem("monCookie")
+profilButton.addEventListener('click', () => {
+    console.log("you are in profile button");
+    window.location = "../user-profile/userprofile.html";
+});
+
+deconnexionButton.addEventListener('click', () => {
+    console.log("you are in deconnexion button");
     window.location = "../mainomain/mainomain.html";
-})
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+        navBarLogo.addEventListener('click', function () {
+        console.log("you are in navbarlogo");
+        profilButton.classList.toggle('initial-hidden');
+        deconnexionButton.classList.toggle('initial-hidden');
+    });
+});
+
+
 
 if(localStorage.getItem("monCookie") === null){
     window.location = "../mainomain/mainomain.html";
 }
-
-console.log(localStorage.getItem("monCookie"));
-
-userProfileDirection;addEventListener('click', () => {
-    window.location = "../user-profile/userprofile.html";
-})

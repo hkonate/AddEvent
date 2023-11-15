@@ -14,11 +14,11 @@ deconnectionBtn.addEventListener("click", () => {
 button.addEventListener("click",(event) => {
     
     event.preventDefault()
-    let myCookie = localStorage.getItem("monCookie");
+    let myCookie = JSON.parse(localStorage.getItem("monCookie"));
     myCookie = `Bearer ${myCookie}`;
     console.log(myCookie);
     console.log(title.value, place.value, date.value, eventDescriptionBtn.value, inclusiveBtn.value);
-    console.log(localStorage.getItem("monCookie"));
+    console.log(JSON.parse(localStorage.getItem("monCookie")));
     const header = {
         "Authorization": `${myCookie}`,
         "Content-type": "application/json; charset=UTF-8"
@@ -40,12 +40,14 @@ button.addEventListener("click",(event) => {
             }),
         }).then(response => response.json())
  
-        .then(json => console.log(json));
+        .then(json => console.log(json))
+        .then(alert("l'évènement a bien été crée"))
+        .then(title.value = "", eventDescriptionBtn.value = "", place.value = "", date.value = "", inclusiveBtn.value = "");
         
     } catch (error) {
         console.log(error.message);
     }
-})
+});
 
 if(localStorage.getItem("monCookie") === null){
     window.location = "../mainomain/mainomain.html";

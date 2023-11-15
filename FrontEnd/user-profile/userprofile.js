@@ -74,8 +74,8 @@ validBtn.addEventListener('click', (event) => {
     }
 });
 
-if(localStorage.getItem("monCookie") === null){
-    window.location = "../mainomain/mainomain.html";
-};
+// if(localStorage.getItem("monCookie") === null){
+//     window.location = "../mainomain/mainomain.html";
+// };
 
 console.log(localStorage.getItem("monCookie"));
