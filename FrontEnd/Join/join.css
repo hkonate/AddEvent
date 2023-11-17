@@ -78,3 +78,7 @@ button{
 .hide{
     display: none;
 }
+
+.hideForReal{
+    scale: 0;
+}

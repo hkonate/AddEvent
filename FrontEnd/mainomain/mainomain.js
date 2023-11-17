@@ -39,12 +39,14 @@ connectionButton.addEventListener('click', (event) => {
                 if(!response.ok){
                     throw new Error(`Erreur HTTP : ${response.status}`);
                 }
-                return response.text();
+                return response.json();
             })
             .then(text => {
                 console.log(text);
-                localStorage.setItem('monCookie', JSON.stringify(text));
+                localStorage.setItem('monCookie', JSON.stringify(text.token));
+                localStorage.setItem('monId', JSON.stringify(text.userId));
                 console.log(JSON.parse(localStorage.getItem("monCookie")));
+                console.log(JSON.parse(localStorage.getItem("monId")));
             })
             .then(data => {
                 window.location = "../main/index.html";

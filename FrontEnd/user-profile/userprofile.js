@@ -7,6 +7,7 @@ const interestV = document.querySelector(".interest-value");
 const valuesToDisplay = document.querySelectorAll(".description-value, .pseudo-value, .interest-value");
 let changesApplied = false;
 const deconnectionBtn = document.querySelector(".deconnexionbtn");
+const myEventBtn = document.querySelector(".myEvent");
 
 deconnectionBtn.addEventListener("click", () => {
     
