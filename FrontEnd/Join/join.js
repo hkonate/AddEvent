@@ -1,47 +1,168 @@
-const button = document.querySelector("button");
-const input = document.querySelector(".input");
-const title = document.querySelector(".title");
-const place = document.querySelector(".place")
-const date = document.querySelector(".date")
-const time = document.querySelector(".time")
+const deconnexionbtnn = document.querySelector(".deconnexionbtn");
+let theCookie = JSON.parse(localStorage.getItem("monCookie"));
+let theId = JSON.parse(localStorage.getItem("monId"));
+
+const header = {
+    "Authorization": `Bearer ${JSON.parse(localStorage.getItem("monCookie"))}`,
+    "Content-type": "application/json; charset=UTF-8"
+}
+
+const handleClick = (buttonList, json) => {
+    for (let i = 0; i < buttonList.length; i++){
+        if(theId === json[i].creator.id){
+            // console.log("creator");
+            buttonList[i].classList.add('hideForReal');
+        };
+        buttonList[i].addEventListener('click', () => {
+            if (json[i].listOfAttendees.map(ligne => Object.values(ligne).toString()).includes(theId)){
+                try {
+                    fetch(`https://social-gather-production.up.railway.app/event/${json[i].id}/false`,{
+                        method: "PUT",
+                        headers: header
+                    })
+                    .then(response => response.json())
+                    .then(
+                        buttonList[i].innerText = "je participe",
+                        buttonList[i].style.backgroundColor = "blue",
+                        console.log("tu es dans la requete de suppression"))
+                    .then(json => {
+                        console.log(json);
+                    })
+                    // .then(window.location = "./join.html") 
+                } catch (error) {
+                    console.log(error.message);
+                }
+            } else {
+                try {
+                    fetch(`https://social-gather-production.up.railway.app/event/${json[i].id}/true`,{
+                        method: "PUT",
+                        headers: header
+                    })
+                    .then(response => response.json())
+                    .then(
+                        buttonList[i].innerText = "je ne veux plus participer",
+                        buttonList[i].style.backgroundColor = "red",
+                        console.log("tu es dans la requete de participation"))
+                    .then(json => {
+                        console.log(json);
+                    })
+                    // .then(window.location = "./join.html")
+                } catch (error) {
+                    console.log(error.message);
+                }
+            }
+        })
+    } 
+}
 
 try {
 
-    fetch("http://localhost:3000/events" )
+    fetch("https://social-gather-production.up.railway.app/event",{
+        method: "GET",
+        headers: header
+    })
     .then(response => response.json())
     .then(json => {
-        const tab = json[0].date.split("T");
-        const tab3 = tab[0].split("-").reverse();
-        const str2 = tab3.join("/");
-        const tab2 = tab[1].split(":");
-        const str = tab2[0] + "h" + tab2[1];
-        title.innerHTML += `<p>${json[0].title}</p>`;
-        place.innerHTML += `<p>${json[0].place}</p>`;
-        date.innerHTML += `<p>${str2}</p>`;
-        time.innerHTML += `<p>${str}</p>`;
+        // console.log(json);
+        // title.innerHTML += `<p>${json[0].title}</p>`;
+        // place.innerHTML += `<p>${json[0].place}</p>`;
+        // date.innerHTML += `<p>${str2}</p>`;
+        // time.innerHTML += `<p>${str}</p>`;
+        let buttonList
+        const eventsContainer = document.querySelector(".event");
+            for(let i = 0; i < json.length; i++){
+                const tab = json[i].schedule.split("T");
+                const tab3 = tab[0].split("-").reverse();
+                const str2 = tab3.join("/");
+                const tab2 = tab[1].split(":");
+                const str = tab2[0] + "h" + tab2[1];
+                const eventElement = document.createElement('div');
+                eventElement.innerHTML = `
+                <div class="container">
+                    <div class="event-box">
+                        <h2>Titre:</h2>
+                        <p>${json[i].title}</p>
+                    </div>
+                    <div class="event-box">
+                        <h2>Lieu:</h2>
+                        <p>${json[i].address}</p>
+                    </div>
+                    <div class="event-box">
+                        <h2>Date:</h2>
+                        <p>${str2}</p>
+                    </div>
+                    <div class="event-box">
+                        <h2>Heure:</h2>
+                        <p>${str}</p>
+                    </div>
+                    <div class="event-box">
+                        <h2>Description:</h2>
+                        <p>${json[i].description}</p>
+                    </div>
+                    <div class="event-box">
+                        <h2>Unclusivité:</h2>
+                        <p>${json[i].inclusive}</p>
+                    </div>
+                    <div class="my-ipt">
+                        <button class="the-btn">Je participe</button>
+                    </div>
+                </div>`;
+            eventsContainer.appendChild(eventElement);
+            buttonList = document.querySelectorAll(".my-ipt button");
+            const checkIfUserIsParticipating = json[i].listOfAttendees.map(ligne => Object.values(ligne).toString()).includes(theId)
+            // console.log(checkIfUserIsParticipating);
+            if(checkIfUserIsParticipating){
+                // console.log(checkIfUserIsParticipating);
+                buttonList[i].style.backgroundColor = 'red';
+                buttonList[i].innerText = 'Je ne veux plus participer';
+            } else {
+                buttonList[i].style.backgroundColor = 'blue';
+                buttonList[i].innerText = "Je participe";
+            }
+        }
+        handleClick(buttonList, json);
     });
-
 } catch (error) {
-    
+    console.log(error.message);
 }
 
-button.addEventListener("click", () =>{
-    if(button.innerText === 'Je participe'){
-        button.style.backgroundColor = 'red'
-        button.innerText = 'Je ne participe pas'
-        input.classList.add('hide')
-    }else if(button.innerText === 'Je ne participe pas'){
-        button.style.backgroundColor = 'rgb(69, 177, 230)'
-        button.innerText = 'Je participe'
-        input.classList.remove('hide')
-    }
+
+
+deconnexionbtnn.addEventListener('click', () => {
+    console.log("you are in deconnexion button");
+    window.location = "../mainomain/mainomain.html";
 });
 
-const enter = (event) =>{
-    if(event.keyCode === 13){
-        button.click()
-    }
-}
 
-input.addEventListener("keypress", enter)
+
+// const enter = (event) =>{
+//     if(event.keyCode === 13){
+//         button.click()
+//     }
+// }
+
+// input.addEventListener("keypress", enter)
+
+
+// try {
+//     fetch("http://localhost:3000/events" )
+//     .then(response => response.json())
+//     .then(json => {
+//         const events = json;
+
+//         const eventsContainer = document.querySelector(".container");
+
+//         events.forEach(event => {
+//             const eventElement = document.createElement('div');
+//             eventElement.innerHTML = `
+//             titre: ${json[0].title}
+//             Lieu: ${json[0].place}
+//             Date: ${str2}
+//             `;
+//             eventsContainer.appendChild(eventElement);
+//         })
+//     })
+// } catch (error) {
+    
+// }
 

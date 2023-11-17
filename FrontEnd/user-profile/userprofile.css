@@ -1,0 +1,120 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+    background-color: beige;
+}
+
+.home-page{
+    width: 100%;
+    height: 5%;
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+}
+
+h3{
+    color: black;
+}
+
+.home-page-btn, .deconnexionbtn, .myEvent{
+    width: 20%;
+    height: 100%;
+    border: none;
+    font-size: 23px;
+    background: none;
+    color: white;
+    transition: 3s;
+}
+
+:root {
+    --hover: #ffffff;
+}
+
+.home-page-btn:hover, .deconnexionbtn:hover, .myEvent:hover{
+    box-shadow: inset 20em 0 0 0 var(--hover);
+    color: black;
+}
+
+.profile-box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-box img{
+    margin-top: 3.5rem;
+    margin-left: 0.8rem;
+    border-radius: 50%;
+    width: 25%;
+    height: auto;
+}
+
+.profile-box button{
+    height: 10%;
+    width: 30%;
+    margin-right: 0.5rem;
+    margin-top: 3.5rem;
+}
+
+.user-presentation{
+    width: 70%;
+    margin-left: 2rem;
+    padding-right: 25rem;
+    word-wrap: break-word;
+}
+
+.user-presentation h3{
+    margin-top: 3.3rem;
+    padding-bottom: 0.5rem;
+}
+
+.presentation-of-user{
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.validation{
+    margin-top: 2rem;
+    margin-left: 1rem;
+}
+
+.hide{
+    transform: scale(0);
+    opacity: 0;
+    display: none;
+}
+
+.presentation-of-user, .pseudoo, .interest {
+    width: auto; /* Par défaut, les champs d'entrée ont une largeur automatique */
+}
+
+.visibles{
+    animation: visible 1s forwards;
+}
+
+@keyframes visible{
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.description-value, .pseudo-value, .interest-value {
+    margin-left: 0; /* Espace entre ":" et la valeur */
+    color: black;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.user-information{
+    margin-top: 2rem;
+}
+
+.user-information h3{
+    margin-bottom: 0.5rem;
+    margin-left: 0.8rem;
+}
