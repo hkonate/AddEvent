@@ -7,16 +7,17 @@ const header = {
     "Content-type": "application/json; charset=UTF-8"
 }
 
-const handleClick = (buttonList, json) => {
+const handleClick = (buttonList, eventTab) => {
     for (let i = 0; i < buttonList.length; i++){
-        if(theId === json[i].creator.id){
+        if(theId === eventTab[i].creator.id){
             // console.log("creator");
             buttonList[i].classList.add('hideForReal');
         };
+        let checkIfUserIsParticipating = eventTab[i].listOfAttendees.map(ligne => Object.values(ligne).toString()).includes(theId)
         buttonList[i].addEventListener('click', () => {
-            if (json[i].listOfAttendees.map(ligne => Object.values(ligne).toString()).includes(theId)){
+            if (checkIfUserIsParticipating){
                 try {
-                    fetch(`https://social-gather-production.up.railway.app/event/${json[i].id}/false`,{
+                    fetch(`https://social-gather-production.up.railway.app/event/${eventTab[i].id}/false`,{
                         method: "PUT",
                         headers: header
                     })
@@ -27,6 +28,8 @@ const handleClick = (buttonList, json) => {
                         console.log("tu es dans la requete de suppression"))
                     .then(json => {
                         console.log(json);
+                        checkIfUserIsParticipating = json.listOfAttendees.map(attendees => Object.values(attendees).toString()).includes(theId)
+                        console.log(checkIfUserIsParticipating);
                     })
                     // .then(window.location = "./join.html") 
                 } catch (error) {
@@ -34,7 +37,7 @@ const handleClick = (buttonList, json) => {
                 }
             } else {
                 try {
-                    fetch(`https://social-gather-production.up.railway.app/event/${json[i].id}/true`,{
+                    fetch(`https://social-gather-production.up.railway.app/event/${eventTab[i].id}/true`,{
                         method: "PUT",
                         headers: header
                     })
@@ -45,6 +48,8 @@ const handleClick = (buttonList, json) => {
                         console.log("tu es dans la requete de participation"))
                     .then(json => {
                         console.log(json);
+                        checkIfUserIsParticipating = json.listOfAttendees.map(attendees => Object.values(attendees).toString()).includes(theId)
+                        console.log(checkIfUserIsParticipating);
                     })
                     // .then(window.location = "./join.html")
                 } catch (error) {
@@ -110,6 +115,7 @@ try {
             eventsContainer.appendChild(eventElement);
             buttonList = document.querySelectorAll(".my-ipt button");
             const checkIfUserIsParticipating = json[i].listOfAttendees.map(ligne => Object.values(ligne).toString()).includes(theId)
+            console.log(checkIfUserIsParticipating);
             // console.log(checkIfUserIsParticipating);
             if(checkIfUserIsParticipating){
                 // console.log(checkIfUserIsParticipating);

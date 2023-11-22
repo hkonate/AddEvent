@@ -16,11 +16,6 @@ const seePassword = () => {
     }
 };
 
-gotomain.addEventListener("click", () => {
-    window.location = "../main/index.html";
-    console.log("tu vas dans le main");
-})
-
 connectionButton.addEventListener('click', (event) => {
     event.preventDefault();
 
