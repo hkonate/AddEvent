@@ -38,14 +38,17 @@ button.addEventListener("click",(event) => {
                 schedule: date.value,
                 inclusive: [inclusiveBtn.value]
             }),
-        }).then(response => response.json())
- 
+        }).then(response => {
+            if (response.ok){
+            alert("L'évènement a bien été crée");
+        }})
+        .then(response => response.json())
         .then(json => console.log(json))
-        .then(alert("l'évènement a bien été crée"))
         .then(title.value = "", eventDescriptionBtn.value = "", place.value = "", date.value = "", inclusiveBtn.value = "");
         
     } catch (error) {
         console.log(error.message);
+        alert("L'évènement n'a pas été crée")
     }
 });
 

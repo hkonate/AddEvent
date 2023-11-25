@@ -8,10 +8,16 @@ const valuesToDisplay = document.querySelectorAll(".description-value, .pseudo-v
 let changesApplied = false;
 const deconnectionBtn = document.querySelector(".deconnexionbtn");
 const myEventBtn = document.querySelector(".myEvent");
+const theUserId = localStorage.getItem("monId");
+const mytoken = JSON.parse(localStorage.getItem("monCookie"));
+const form = document.getElementById("form");
+const formData = new FormData(form, validBtn);
+
 
 deconnectionBtn.addEventListener("click", () => {
     
-    localStorage.removeItem("monCookie")
+    localStorage.removeItem("monCookie");
+    localStorage.removeItem("monId");
     window.location = "../mainomain/mainomain.html";
 })
 
@@ -46,18 +52,12 @@ validBtn.addEventListener('click', (event) => {
 
     event.preventDefault();
 
-        if(localStorage.getItem("monCookie")){
-            const mytoken = JSON.parse(localStorage.getItem("monCookie"))
-            console.log(mytoken);
+        if(validBtn.textContent = "Valider mes changements"){
             try {
-            fetch('https://social-gather-production.up.railway.app/profile', {
-                method: "POST",
+            fetch(`https://social-gather-production.up.railway.app/profile/${theUserId}`, {
+                method: "PUT",
 
-                body: JSON.stringify({
-                    bio: descriptionV,
-                    pseudo: pseudoV,
-                    hobbies: interestV
-            }),
+                body: formData,
             headers: {
                 "Authorization": `Bearer ${mytoken}`,
                 "Content-type": "application/json; charset=UTF-8"
@@ -75,8 +75,6 @@ validBtn.addEventListener('click', (event) => {
     }
 });
 
-// if(localStorage.getItem("monCookie") === null){
-//     window.location = "../mainomain/mainomain.html";
-// };
-
-console.log(localStorage.getItem("monCookie"));
+if(localStorage.getItem("monCookie") === null){
+    window.location = "../mainomain/mainomain.html";
+};
