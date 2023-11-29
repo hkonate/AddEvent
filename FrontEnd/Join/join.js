@@ -1,6 +1,12 @@
 const deconnexionbtnn = document.querySelector(".deconnexionbtn");
 let theCookie = JSON.parse(localStorage.getItem("monCookie"));
 let userId = JSON.parse(localStorage.getItem("monId"));
+const myModifyBtn = document.querySelector(".modify-btn");
+const hide = document.querySelectorAll(".hide");
+const allMyInput = document.querySelectorAll(".titleValueInput , .locValueInput, .dateValueInput, .timeValueInput, .descriptionValueInput, .inclusivityValueInput");
+let valueOfInput = document.querySelectorAll(".titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue");
+let changes = false;
+const titleValuee = document.querySelector(".titleValue");
 
 const header = {
     "Authorization": `Bearer ${JSON.parse(localStorage.getItem("monCookie"))}`,
@@ -61,8 +67,6 @@ for (let j = 0; j < eventSuppBtn.length; j++){
         eventSuppBtn[j].classList.add('hideForReal');
     }
     eventSuppBtn[j].addEventListener('click', () => {
-        console.log("tu es dans le listener");
-            console.log(eventTab[j].creator.id);
             try {
             fetch(`https://social-gather-production.up.railway.app/event/${eventTab[j].id}`, {
                 method: "DELETE",
@@ -84,10 +88,56 @@ for(let k = 0; k < eventModifyBtn.length; k++){
     if(userId != eventTab[k].creator.id){
         eventModifyBtn[k].classList.add('hideForReal');
     }
-}
     eventModifyBtn[k].addEventListener('click', () => {
-        
+        const myEvent = eventModifyBtn[k].parentNode;
+        const myEventChildren = myEvent.children;
+        // const p = myEventChildren.querySelector()
+        if(!changes){
+            for (let i = 0; i < myEventChildren.length; i++) {
+                const child = myEventChildren[i];
+                console.log(child);
+                // Vérifie si l'enfant est un <p>, si oui, remplace-le par un <input>
+                if (child.children[2] && child.children[2].tagName === 'P') {
+                    console.log("helo");
+                    child.children[1].classList.remove('hide');
+                    child.children[1].value = child.children[2].textContent;
+                    eventModifyBtn[k].textContent = "Valider mes modifications";
+                    changes = true;
+                }
+            }
+        } else {
+            for (let i = 0; i < myEventChildren.length; i++) {
+                const child = myEventChildren[i];
+                if (child.children[1] && child.children[1].tagName === 'INPUT') {
+                    child.children[1].classList.add('hide');
+                    eventModifyBtn[k].textContent = "Modifier mon évènement";
+                    changes = false
+                }
+                // Vérifie si l'enfant est un <input>, si oui, remplace-le par un <p>
+            }
+        }
+        if(eventModifyBtn[k].textContent === "Modifier mon évènement"){
+            console.log("requete envoyer");
+            try {
+                fetch(`https://social-gather-production.up.railway.app/event/${eventTab[k].id}`, {
+                    method: "PUT",
+                    headers: header,
+                    body: JSON.stringify({
+                        title:title.value
+                    })
+                    
+                })
+                .then(response => response.json())
+                .then(json => {
+                    console.log(json);
+                })
+            } catch (error) {
+                console.log(error.message);
+                console.log("l'évènement n'a pas pu être modifié");
+            }
+        }
     })
+}
 }
 
 try {
@@ -118,42 +168,41 @@ try {
                 <div class="container">
                     <div class="event-box">
                         <h2>Titre:</h2>
-                        <p>${json[i].title}</p>
+                        <input class="titleValueInput hide" type="text"><p name="titleValue" class="titleValue">${json[i].title}</p>
                     </div>
                     <div class="event-box">
                         <h2>Lieu:</h2>
-                        <p>${json[i].address}</p>
+                        <input class="locValueInput hide" type="text"><p class="locValue">${json[i].address}</p>
                     </div>
                     <div class="event-box">
                         <h2>Date:</h2>
-                        <p>${str2}</p>
+                        <input class="dateValueInput hide" type="text"><p class="dateValue">${str2}</p>
                     </div>
                     <div class="event-box">
                         <h2>Heure:</h2>
-                        <p>${str}</p>
+                        <input class="timeValueInput hide" type="text"><p class="timeValue">${str}</p>
                     </div>
                     <div class="event-box">
                         <h2>Description:</h2>
-                        <p>${json[i].description}</p>
+                        <input class="descriptionValueInput hide" type="text"><p class="descriptionValue">${json[i].description}</p>
                     </div>
                     <div class="event-box">
                         <h2>Inclusivité:</h2>
-                        <p>${json[i].inclusive}</p>
+                        <input class="inclusivityValueInput hide" type="text"><p class="inclusivityValue">${json[i].inclusive}</p>
                     </div>
                     <div class="eventSuppr">
                         <button class="the-btn">supprimer l'évènement</button>
                     </div>
-                    <div class="eventmodify">
-                        <button class="the-btn">modifier l'évènement</button>
-                    </div>
+                        <button class="modify-btn">Modifier mon évènement</button>
                     <div class="my-ipt">
                         <button class="the-btn">Je participe</button>
                     </div>
                 </div>`;
             eventsContainer.appendChild(eventElement);
             buttonList = document.querySelectorAll(".my-ipt button");
-            eventModify = document.querySelectorAll(".eventmodify");
+            eventModify = document.querySelectorAll(".modify-btn");
             eventSuppr = document.querySelectorAll(".eventSuppr");
+            valueOfInput = document.querySelectorAll(".titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue");
             const checkIfUserIsParticipating = json[i].listOfAttendees.map(ligne => Object.values(ligne).toString()).includes(userId)
             if(checkIfUserIsParticipating){
                 buttonList[i].style.backgroundColor = 'red';

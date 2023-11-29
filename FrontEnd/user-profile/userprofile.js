@@ -27,6 +27,7 @@ homeBtn.addEventListener('click', () => {
 
 validBtn.addEventListener('click', (event) => {
     console.log("bonjour");
+    console.log(valuesToDisplay);
     if (!changesApplied) {
         valuesToDisplay.forEach((value, index) => {
             value.textContent = hideBtn[index].value;

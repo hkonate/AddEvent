@@ -80,6 +80,14 @@ h1{
     color: rgba(240, 240, 240, 0.99);
 }
 
+.image-of-event{
+    display: flex;
+    justify-content: space-around;
+    margin-right: 1.5rem;
+    padding-top: 40px;
+    color: rgba(240, 240, 240, 0.99);
+}
+
 .inclusive-iptt{
     display: flex;
     justify-content: space-around;

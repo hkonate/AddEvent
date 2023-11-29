@@ -76,9 +76,33 @@ button{
 }
 
 .hide{
+    transform: scale(0);
+    opacity: 0;
     display: none;
 }
 
 .hideForReal{
     scale: 0;
+}
+
+@keyframes visible{
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.visible{
+    animation: visible 1s forwards;
+}
+
+.titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue{
+    margin-left: 0; /* Espace entre ":" et la valeur */
+    color: black;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.titleValueInput , .locValueInput, .dateValueInput, .timeValueInput, .descriptionValueInput, .inclusivityValueInput{
+    width: auto; /* Par défaut, les champs d'entrée ont une largeur automatique */
 }

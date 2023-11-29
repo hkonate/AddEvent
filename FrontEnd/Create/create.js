@@ -5,6 +5,8 @@ const button = document.querySelector(".my-ipt");
 const deconnectionBtn = document.querySelector(".deconnexionbtn");
 const eventDescriptionBtn = document.querySelector(".ipt-of-event-description");
 const inclusiveBtn = document.querySelector(".inclusive-ipt");
+const image = document.querySelector(".ipt-of-event-image");
+let formData
 
 deconnectionBtn.addEventListener("click", () => {
     localStorage.removeItem("monCookie")
@@ -18,6 +20,14 @@ button.addEventListener("click",(event) => {
     myCookie = `Bearer ${myCookie}`;
     console.log(myCookie);
     console.log(title.value, place.value, date.value, eventDescriptionBtn.value, inclusiveBtn.value);
+    formData = new FormData();
+    formData.append('title', title.value);
+    formData.append('description', eventDescriptionBtn.value);
+    formData.append('address', place.value);
+    formData.append('schedule', date.value);
+    formData.append('images', [image.files[0].name]);
+    console.log(image.files[0].name);
+    formData.append('inclusive', inclusiveBtn.value);
     console.log(JSON.parse(localStorage.getItem("monCookie")));
     const header = {
         "Authorization": `${myCookie}`,
@@ -36,11 +46,15 @@ button.addEventListener("click",(event) => {
                 description: eventDescriptionBtn.value,
                 address: place.value,
                 schedule: date.value,
+                images: image.files[0].name,
                 inclusive: [inclusiveBtn.value]
             }),
-        }).then(response => {
+        })
+        .then(response => {
             if (response.ok){
-            alert("L'évènement a bien été crée");
+            return response.json();
+        }else{
+            throw new Error("Echec de la requete");
         }})
         .then(response => response.json())
         .then(json => console.log(json))

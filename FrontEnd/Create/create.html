@@ -10,7 +10,7 @@
 <body>
     <button class="deconnexionbtn">deconnexion</button>
     <h1>Créer mon évènement</h1>
-    <form class="container" method="POST">
+    <form enctype="multipart/form-data" class="container" method="POST">
         <div class="event-box">
             <div class="title">
                 <h2>Titre:</h2>
@@ -27,6 +27,10 @@
             <div class="description-of-event">
                 <h2>Description:</h2>
                 <input class="ipt-of-event-description" type="text">
+            </div>
+            <div class="image-of-event">
+                <h2>Images:</h2>
+                <input class="ipt-of-event-image" type="file" accept="image/*">
             </div>
             <div class="inclusive-iptt">
                 <h2>Inclusive:</h2>
