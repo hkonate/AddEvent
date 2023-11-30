@@ -8,6 +8,7 @@ let valueOfInput = document.querySelectorAll(".titleValue, .locValue, .dateValue
 let changes = false;
 const titleValuee = document.querySelector(".titleValue");
 
+
 const header = {
     "Authorization": `Bearer ${JSON.parse(localStorage.getItem("monCookie"))}`,
     "Content-type": "application/json; charset=UTF-8"
@@ -88,7 +89,11 @@ for(let k = 0; k < eventModifyBtn.length; k++){
     if(userId != eventTab[k].creator.id){
         eventModifyBtn[k].classList.add('hideForReal');
     }
-    eventModifyBtn[k].addEventListener('click', () => {
+    eventModifyBtn[k].addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(document.getElementById("myForm"));
+
         const myEvent = eventModifyBtn[k].parentNode;
         const myEventChildren = myEvent.children;
         // const p = myEventChildren.querySelector()
@@ -118,14 +123,12 @@ for(let k = 0; k < eventModifyBtn.length; k++){
         }
         if(eventModifyBtn[k].textContent === "Modifier mon évènement"){
             console.log("requete envoyer");
+            console.log(formData);
             try {
                 fetch(`https://social-gather-production.up.railway.app/event/${eventTab[k].id}`, {
                     method: "PUT",
                     headers: header,
-                    body: JSON.stringify({
-                        title:title.value
-                    })
-                    
+                    body: formData
                 })
                 .then(response => response.json())
                 .then(json => {
@@ -166,37 +169,39 @@ try {
                 const eventElement = document.createElement('div');
                 eventElement.innerHTML = `
                 <div class="container">
-                    <div class="event-box">
-                        <h2>Titre:</h2>
-                        <input class="titleValueInput hide" type="text"><p name="titleValue" class="titleValue">${json[i].title}</p>
-                    </div>
-                    <div class="event-box">
-                        <h2>Lieu:</h2>
-                        <input class="locValueInput hide" type="text"><p class="locValue">${json[i].address}</p>
-                    </div>
-                    <div class="event-box">
-                        <h2>Date:</h2>
-                        <input class="dateValueInput hide" type="text"><p class="dateValue">${str2}</p>
-                    </div>
-                    <div class="event-box">
-                        <h2>Heure:</h2>
-                        <input class="timeValueInput hide" type="text"><p class="timeValue">${str}</p>
-                    </div>
-                    <div class="event-box">
-                        <h2>Description:</h2>
-                        <input class="descriptionValueInput hide" type="text"><p class="descriptionValue">${json[i].description}</p>
-                    </div>
-                    <div class="event-box">
-                        <h2>Inclusivité:</h2>
-                        <input class="inclusivityValueInput hide" type="text"><p class="inclusivityValue">${json[i].inclusive}</p>
-                    </div>
-                    <div class="eventSuppr">
-                        <button class="the-btn">supprimer l'évènement</button>
-                    </div>
-                        <button class="modify-btn">Modifier mon évènement</button>
-                    <div class="my-ipt">
-                        <button class="the-btn">Je participe</button>
-                    </div>
+                    <form id="myForm">
+                        <div class="event-box">
+                            <h2>Titre:</h2>
+                            <input class="titleValueInput hide" type="text"><p name="titleValue" class="titleValue">${json[i].title}</p>
+                        </div>
+                        <div class="event-box">
+                            <h2>Lieu:</h2>
+                            <input class="locValueInput hide" type="text"><p class="locValue">${json[i].address}</p>
+                        </div>
+                        <div class="event-box">
+                            <h2>Date:</h2>
+                            <input class="dateValueInput hide" type="text"><p class="dateValue">${str2}</p>
+                        </div>
+                        <div class="event-box">
+                            <h2>Heure:</h2>
+                            <input class="timeValueInput hide" type="text"><p class="timeValue">${str}</p>
+                        </div>
+                        <div class="event-box">
+                            <h2>Description:</h2>
+                            <input class="descriptionValueInput hide" type="text"><p class="descriptionValue">${json[i].description}</p>
+                        </div>
+                        <div class="event-box">
+                            <h2>Inclusivité:</h2>
+                            <input class="inclusivityValueInput hide" type="text"><p class="inclusivityValue">${json[i].inclusive}</p>
+                        </div>
+                        <div class="eventSuppr">
+                            <button class="the-btn">supprimer l'évènement</button>
+                        </div>
+                            <button class="modify-btn">Modifier mon évènement</button>
+                        <div class="my-ipt">
+                            <button class="the-btn">Je participe</button>
+                        </div>
+                    </form>
                 </div>`;
             eventsContainer.appendChild(eventElement);
             buttonList = document.querySelectorAll(".my-ipt button");
