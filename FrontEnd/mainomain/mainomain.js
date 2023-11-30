@@ -38,14 +38,17 @@ connectionButton.addEventListener('click', (event) => {
             })
             .then(text => {
                 console.log(text);
-                localStorage.setItem('monCookie', JSON.stringify(text.token));
-                localStorage.setItem('monId', JSON.stringify(text.userId));
+                localStorage.setItem('monCookie', JSON.stringify(text.authTokens[text.authTokens.length -1]));
+                localStorage.setItem('monId', JSON.stringify(text.id));
                 console.log(JSON.parse(localStorage.getItem("monCookie")));
                 console.log(JSON.parse(localStorage.getItem("monId")));
             })
             .then(data => {
                 window.location = "../main/index.html";
             })
+            .catch(error => {
+                console.error(error.message);
+            });
     }catch (error) {
         console.log(error.message);
     }

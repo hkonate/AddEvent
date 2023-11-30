@@ -10,7 +10,7 @@
 <body>
     <button class="deconnexionbtn">deconnexion</button>
     <h1>Créer mon évènement</h1>
-    <form enctype="multipart/form-data" class="container" method="POST">
+    <form  id="container">
         <div class="event-box">
             <div class="title">
                 <h2>Titre:</h2>
@@ -36,10 +36,10 @@
                 <h2>Inclusive:</h2>
                 <input class="inclusive-ipt" type="text">
             </div>
-            <div class="my-ipt">
-                <input type="submit" value="Valider">
-            </div>
         </div>    
+        <div class="my-ipt">
+            <input id="submit-button" type="submit" value="Valider">
+        </div>
     </form>
 </body>
 </html>
