@@ -1,6 +1,7 @@
 const leftAndRight = document.querySelectorAll(".container>div");
 const profilButton = document.querySelector(".profil-direction");
 const deconnexionButton = document.querySelector(".deconnexionbtn");
+const navBarContainer = document.querySelector('.navbar-container');
 const navBarLogo = document.getElementById("navbarlogo");
 
 
@@ -28,6 +29,7 @@ deconnexionButton.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', function () {
         navBarLogo.addEventListener('click', function () {
         console.log("you are in navbarlogo");
+        navBarContainer.classList.toggle('visible');
         profilButton.classList.toggle('initial-hidden');
         deconnexionButton.classList.toggle('initial-hidden');
     });

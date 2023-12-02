@@ -11,17 +11,39 @@
     }        
 }
 
+.mylogo-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2; /* Ensure the logo is above other content */
+}
+
+.navbar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #441A28;
+    display: flex;
+    justify-content: center;
+    transition: transform 2.5s;
+    z-index: 1; /* Ensure the navbar is behind other content initially */
+}
+
+.navbar-container.visible {
+    transform: translateX(0);
+}
+
 .navbar {
-    background-color: beige;
     display: flex;
     justify-content: space-between;
 }
 
-#navbarlogo{
+#navbarlogo {
     width: 3rem;
     height: 3rem;
-    padding-top: 0.2rem;
-    padding-left: 0.2rem;
+    padding: 0.2rem;
+    cursor: pointer;
 }
 
 #navbarlogo:hover{
@@ -32,11 +54,10 @@ button {
     padding: 10px;
     margin: 5px;
     font-size: 16px;
-    transition: transform 2.5s;
 }
 
 .initial-hidden {
-    transform: translateX(-1500%);
+    transform: translateY(-100%);
 }
 
 .container {
