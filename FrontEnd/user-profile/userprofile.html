@@ -15,14 +15,17 @@
             <button class="myEvent">Mes évènements</button>
         </div>
         <div class="profile-box">
-            <form id="form" method="PUT">
-                <img class="userProfilePicture" src="/AddEvent/FrontEnd/img/test.jpg" alt="user_profile_picture">
-                    <div class="user-presentation">
-                        <h3>Parle nous de toi </h3>
-                        <input class="presentation-of-user hide" type="text"><span class="description-value"></span>
+            <form id="form" enctype="multipart/form-data">
+                <div class="user-presentation">
+                        <img class="userProfilePicture" src="" alt="user_profile_picture">
+                        <input class="userProfileInput hide" type="file">
+                        <div>
+                            <h2>Parle nous de toi </h2>
+                            <input class="presentation-of-user hide" type="text"><span class="description-value"></span>
+                        </div>
+                        <button class="modifbtn">Modifier mon profil</button>
                     </div>
-                <button class="modifbtn">Modifier mon profil</button>
-                <h3>Pseudo: <input class="pseudoo hide" type="text"><span class="pseudo-value"></span></h3>
+                <!-- <h3>Pseudo: <input class="pseudoo hide" type="text"><span class="pseudo-value"></span></h3> -->
                 <h3>Centre d'intérêt: <input class="interest hide" type="text"><span class="interest-value"></span></h3>
             </form>
         </div>
