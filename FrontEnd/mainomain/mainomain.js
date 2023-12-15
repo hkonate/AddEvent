@@ -44,7 +44,7 @@ connectionButton.addEventListener('click', (event) => {
                 console.log(JSON.parse(localStorage.getItem("monId")));
             })
             .then(data => {
-                window.location = "../main/index.html";
+                window.location = "../profilecreation/profilecreation.html";
             })
             .catch(error => {
                 console.error(error.message);

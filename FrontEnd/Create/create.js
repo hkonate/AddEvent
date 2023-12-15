@@ -44,7 +44,10 @@ button.addEventListener("click", (event) =>     {
             body: formdata,
         })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => 
+            console.log(data),
+            alert("L'évènement n'a pas été crée")
+        )
         
         // .then(response => {
         //     if (response.ok){

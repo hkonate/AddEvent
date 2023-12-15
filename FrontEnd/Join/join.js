@@ -3,11 +3,9 @@ let theCookie = JSON.parse(localStorage.getItem("monCookie"));
 let userId = JSON.parse(localStorage.getItem("monId"));
 const myModifyBtn = document.querySelector(".modify-btn");
 const hide = document.querySelectorAll(".hide");
-const allMyInput = document.querySelectorAll(".titleValueInput , .locValueInput, .dateValueInput, .timeValueInput, .descriptionValueInput, .inclusivityValueInput");
 let valueOfInput = document.querySelectorAll(".titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue");
 let changes = false;
 const titleValuee = document.querySelector(".titleValue");
-
 
 const header = {
     "Authorization": `Bearer ${JSON.parse(localStorage.getItem("monCookie"))}`,
@@ -21,7 +19,8 @@ const handleClick = (buttonList, eventTab, eventModifyBtn, eventSuppBtn) => {
             buttonList[i].classList.add('hideForReal');
         };
         let checkIfUserIsParticipating = eventTab[i].listOfAttendees.map(ligne => Object.values(ligne).toString()).includes(userId)
-        buttonList[i].addEventListener('click', () => {
+        buttonList[i].addEventListener('click', (event) => {
+            event.preventDefault();
             if (checkIfUserIsParticipating){
                 try {
                     fetch(`https://social-gather-production.up.railway.app/event/${eventTab[i].id}/false`,{
@@ -67,7 +66,9 @@ for (let j = 0; j < eventSuppBtn.length; j++){
     if(userId != eventTab[j].creator.id){
         eventSuppBtn[j].classList.add('hideForReal');
     }
-    eventSuppBtn[j].addEventListener('click', () => {
+    eventSuppBtn[j].addEventListener('click', (event) => {
+        console.log("hello");
+        event.preventDefault();
             try {
             fetch(`https://social-gather-production.up.railway.app/event/${eventTab[j].id}`, {
                 method: "DELETE",
@@ -85,6 +86,7 @@ for (let j = 0; j < eventSuppBtn.length; j++){
         
     })
 }
+
 for(let k = 0; k < eventModifyBtn.length; k++){
     if(userId != eventTab[k].creator.id){
         eventModifyBtn[k].classList.add('hideForReal');
@@ -92,7 +94,17 @@ for(let k = 0; k < eventModifyBtn.length; k++){
     eventModifyBtn[k].addEventListener('click', (event) => {
         event.preventDefault();
 
+        const locValueInput = document.querySelector(".locValue").value;
+        const dateValueInput = document.querySelector(".dateValue").value;
+        const timeValueInput = document.querySelector(".timeValueInput").value;
+        const descriptionValueInput = document.querySelector(".descriptionValue").value;
+        const inclusivityValueInput = document.querySelector(".inclusivityValue").value;
         const formData = new FormData(document.getElementById("myForm"));
+        // formData.append("title", titleInputValue);
+        formData.append("description", descriptionValueInput);
+        formData.append("schedule", dateValueInput);
+        formData.append("address", locValueInput);
+        formData.append("inclusive", inclusivityValueInput);
 
         const myEvent = eventModifyBtn[k].parentNode;
         const myEventChildren = myEvent.children;
@@ -100,13 +112,13 @@ for(let k = 0; k < eventModifyBtn.length; k++){
         if(!changes){
             for (let i = 0; i < myEventChildren.length; i++) {
                 const child = myEventChildren[i];
-                console.log(child);
                 // Vérifie si l'enfant est un <p>, si oui, remplace-le par un <input>
                 if (child.children[2] && child.children[2].tagName === 'P') {
-                    console.log("helo");
                     child.children[1].classList.remove('hide');
                     child.children[1].value = child.children[2].textContent;
                     eventModifyBtn[k].textContent = "Valider mes modifications";
+                    const titleInputValue = document.getElementById("titleValueInput");
+                    console.log(titleInputValue.value);
                     changes = true;
                 }
             }
@@ -122,17 +134,18 @@ for(let k = 0; k < eventModifyBtn.length; k++){
             }
         }
         if(eventModifyBtn[k].textContent === "Modifier mon évènement"){
-            console.log("requete envoyer");
-            console.log(formData);
+            console.log(timeValueInput);
+            console.log(titleInputValue.value);
             try {
                 fetch(`https://social-gather-production.up.railway.app/event/${eventTab[k].id}`, {
                     method: "PUT",
-                    headers: header,
+                    headers: {"Authorization": `Bearer ${JSON.parse(localStorage.getItem("monCookie"))}`},
                     body: formData
                 })
                 .then(response => response.json())
                 .then(json => {
                     console.log(json);
+                    alert("l'évènement à été modifié avec succès")
                 })
             } catch (error) {
                 console.log(error.message);
@@ -164,15 +177,15 @@ try {
                 const tab = json[i].schedule.split("T");
                 const tab3 = tab[0].split("-").reverse();
                 const str2 = tab3.join("/");
-                const tab2 = tab[1].split(":");
-                const str = tab2[0] + "h" + tab2[1];
+                // const tab2 = tab[1].split(":");
+                // const str = tab2[0] + "h" + tab2[1];
                 const eventElement = document.createElement('div');
                 eventElement.innerHTML = `
                 <div class="container">
                     <form id="myForm">
                         <div class="event-box">
                             <h2>Titre:</h2>
-                            <input class="titleValueInput hide" type="text"><p name="titleValue" class="titleValue">${json[i].title}</p>
+                            <input id="titleValueInput" class="hide" type="text"><p name="titleValue" class="titleValue">${json[i].title}</p>
                         </div>
                         <div class="event-box">
                             <h2>Lieu:</h2>
@@ -184,11 +197,15 @@ try {
                         </div>
                         <div class="event-box">
                             <h2>Heure:</h2>
-                            <input class="timeValueInput hide" type="text"><p class="timeValue">${str}</p>
+                            <input class="timeValueInput hide" type="text"><p class="timeValue">${tab[1]}</p>
                         </div>
                         <div class="event-box">
                             <h2>Description:</h2>
                             <input class="descriptionValueInput hide" type="text"><p class="descriptionValue">${json[i].description}</p>
+                        </div>
+                        <div class="event-box">
+                            <h2>Image:</h2>
+                            <img class="imageOfEvent" src="${json[i].images[1]}" alt="image de l'event"></img>
                         </div>
                         <div class="event-box">
                             <h2>Inclusivité:</h2>
@@ -207,7 +224,6 @@ try {
             buttonList = document.querySelectorAll(".my-ipt button");
             eventModify = document.querySelectorAll(".modify-btn");
             eventSuppr = document.querySelectorAll(".eventSuppr");
-            valueOfInput = document.querySelectorAll(".titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue");
             const checkIfUserIsParticipating = json[i].listOfAttendees.map(ligne => Object.values(ligne).toString()).includes(userId)
             if(checkIfUserIsParticipating){
                 buttonList[i].style.backgroundColor = 'red';
