@@ -6,6 +6,31 @@ const form = document.getElementById("container");
 //     localStorage.removeItem("monCookie")
 //     window.location = "../mainomain/mainomain.html";
 // })
+
+document.addEventListener("DOMContentLoaded", function () {
+    const addImageButton = document.getElementById("add-img-button");
+    addImageButton.addEventListener("click", function (event) {
+        event.preventDefault();  // Empêcher le rechargement de la page par défaut
+        addImageInput();
+    });
+});
+
+// Fonction pour ajouter un nouveau champ d'entrée d'image
+function addImageInput() {
+    const imageContainer = document.querySelector(".image-of-event");
+
+    // Création d'un nouvel élément input de type fichier
+    const newInput = document.createElement("input");
+    newInput.type = "file";
+    newInput.accept = "image/*";
+    newInput.className = "ipt-of-event-image";
+    newInput.multiple = true;
+
+    // Ajout du nouvel élément à la fin du conteneur des images
+    imageContainer.appendChild(newInput);
+}
+
+
 button.addEventListener("click", (event) =>     {
     event.preventDefault()
     const title = document.getElementById("text").value;
@@ -13,7 +38,17 @@ button.addEventListener("click", (event) =>     {
     const date = document.getElementById("dt").value;
     const eventDescriptionBtn = document.querySelector(".description-of-event input").value;
     const inclusiveBtn = document.querySelector(".inclusive-ipt").value;
-    const image = document.querySelector(".image-of-event input").files[0];
+    const images = document.querySelectorAll(".ipt-of-event-image");
+
+    const filesArray = [];
+
+    images.forEach((input) => {
+        const files = input.files;
+        for(let i = 0; i < files.length; i++){
+            filesArray.push(files[i]);
+        }
+    })
+
     let myCookie = JSON.parse(localStorage.getItem("monCookie"));
     myCookie = `Bearer ${myCookie}`;
     // console.log(myCookie);
@@ -23,7 +58,10 @@ button.addEventListener("click", (event) =>     {
     formdata.append('description', eventDescriptionBtn);
     formdata.append('schedule', date);
     formdata.append('address', place);
-    formdata.append('files', image);
+    for(let i = 0; i < filesArray.length; i++){
+        console.log(filesArray[i]);
+        formdata.append(`files`, filesArray[i]);
+    }
     formdata.append('inclusive[]', inclusiveBtn);
     console.log(JSON.parse(localStorage.getItem("monCookie")));
     const header = {
@@ -46,7 +84,7 @@ button.addEventListener("click", (event) =>     {
         .then(response => response.json())
         .then(data => 
             console.log(data),
-            alert("L'évènement n'a pas été crée")
+            alert("L'évènement a bien été crée")
         )
         
         // .then(response => {

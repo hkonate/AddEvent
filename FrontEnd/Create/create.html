@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./create.css">
-    <script defer src="./create.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -28,9 +27,10 @@
                 <h2>Description:</h2>
                 <input class="ipt-of-event-description" type="text">
             </div>
+            <button id="add-img-button">Ajouter une image</button>
             <div class="image-of-event">
                 <h2>Images:</h2>
-                <input class="ipt-of-event-image" type="file" accept="image/*">
+                <input class="ipt-of-event-image" type="file" accept="image/*" multiple>
             </div>
             <div class="inclusive-iptt">
                 <h2>Inclusive:</h2>
@@ -41,5 +41,6 @@
             <input id="submit-button" type="submit" value="Valider">
         </div>
     </form>
+    <script defer src="./create.js"></script>
 </body>
 </html>

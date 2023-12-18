@@ -95,14 +95,11 @@ for(let k = 0; k < eventModifyBtn.length; k++){
         event.preventDefault();
 
         const locValueInput = document.querySelector(".locValue").value;
-        const dateValueInput = document.querySelector(".dateValue").value;
-        const timeValueInput = document.querySelector(".timeValueInput").value;
         const descriptionValueInput = document.querySelector(".descriptionValue").value;
         const inclusivityValueInput = document.querySelector(".inclusivityValue").value;
         const formData = new FormData(document.getElementById("myForm"));
         // formData.append("title", titleInputValue);
         formData.append("description", descriptionValueInput);
-        formData.append("schedule", dateValueInput);
         formData.append("address", locValueInput);
         formData.append("inclusive", inclusivityValueInput);
 
@@ -112,20 +109,19 @@ for(let k = 0; k < eventModifyBtn.length; k++){
         if(!changes){
             for (let i = 0; i < myEventChildren.length; i++) {
                 const child = myEventChildren[i];
+                console.log(child);
                 // Vérifie si l'enfant est un <p>, si oui, remplace-le par un <input>
                 if (child.children[2] && child.children[2].tagName === 'P') {
                     child.children[1].classList.remove('hide');
                     child.children[1].value = child.children[2].textContent;
                     eventModifyBtn[k].textContent = "Valider mes modifications";
-                    const titleInputValue = document.getElementById("titleValueInput");
-                    console.log(titleInputValue.value);
                     changes = true;
                 }
             }
         } else {
             for (let i = 0; i < myEventChildren.length; i++) {
                 const child = myEventChildren[i];
-                if (child.children[1] && child.children[1].tagName === 'INPUT') {
+                if (child.children[1] && child.children[1].tagName === 'INPUT'){
                     child.children[1].classList.add('hide');
                     eventModifyBtn[k].textContent = "Modifier mon évènement";
                     changes = false
@@ -193,11 +189,11 @@ try {
                         </div>
                         <div class="event-box">
                             <h2>Date:</h2>
-                            <input class="dateValueInput hide" type="text"><p class="dateValue">${str2}</p>
+                            <p class="dateValue">${str2}</p>
                         </div>
                         <div class="event-box">
                             <h2>Heure:</h2>
-                            <input class="timeValueInput hide" type="text"><p class="timeValue">${tab[1]}</p>
+                            <p class="timeValue">${tab[1]}</p>
                         </div>
                         <div class="event-box">
                             <h2>Description:</h2>
@@ -206,6 +202,7 @@ try {
                         <div class="event-box">
                             <h2>Image:</h2>
                             <img class="imageOfEvent" src="${json[i].images[1]}" alt="image de l'event"></img>
+                            <input class="imageInput hide" hide" type="file">
                         </div>
                         <div class="event-box">
                             <h2>Inclusivité:</h2>
