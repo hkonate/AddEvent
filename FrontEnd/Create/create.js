@@ -31,13 +31,21 @@ function addImageInput() {
 }
 
 
-button.addEventListener("click", (event) =>     {
+button.addEventListener("click", async (event) =>     {
     event.preventDefault()
     const title = document.getElementById("text").value;
     const place = document.querySelector(".place input").value;
     const date = document.getElementById("dt").value;
+
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    const checkedBox =  document.querySelectorAll('input[type="checkbox"]:checked');
+    const checkBoxChecked = Array.from(checkedBox).map(checkbox => {
+        const labelOfCheckbox = document.querySelector(`label[for="${checkbox.id}"]`);
+        return labelOfCheckbox.dataset.value;
+    });
+    console.log(checkBoxChecked);
     const eventDescriptionBtn = document.querySelector(".description-of-event input").value;
-    const inclusiveBtn = document.querySelector(".inclusive-ipt").value;
     const images = document.querySelectorAll(".ipt-of-event-image");
 
     const filesArray = [];
@@ -62,7 +70,10 @@ button.addEventListener("click", (event) =>     {
         console.log(filesArray[i]);
         formdata.append(`files`, filesArray[i]);
     }
-    formdata.append('inclusive[]', inclusiveBtn);
+    const inclusiveFormDataKey = "inclusive[]";
+    for(let i = 0; i < checkBoxChecked.length; i++){
+        formdata.append(inclusiveFormDataKey, checkBoxChecked[i]);
+    }
     console.log(JSON.parse(localStorage.getItem("monCookie")));
     const header = {
         "Authorization": myCookie,

@@ -82,7 +82,6 @@ h1{
 
 .image-of-event{
     display: flex;
-    justify-content: space-around;
     margin-right: 1.5rem;
     padding-top: 40px;
     color: rgba(240, 240, 240, 0.99);

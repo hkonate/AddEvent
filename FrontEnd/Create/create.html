@@ -30,11 +30,24 @@
             <button id="add-img-button">Ajouter une image</button>
             <div class="image-of-event">
                 <h2>Images:</h2>
-                <input class="ipt-of-event-image" type="file" accept="image/*" multiple>
+                <div class="imageinput">
+                    <input class="ipt-of-event-image" type="file" accept="image/*" multiple>
+                </div>
             </div>
             <div class="inclusive-iptt">
                 <h2>Inclusive:</h2>
-                <input class="inclusive-ipt" type="text">
+                <div class="all-checkbox">
+                    <input id="checkbox-halal" name="checkbox-halal" type="checkbox" value="HALAL">
+                    <label for="checkbox-halal" data-value="HALAL">Halal</label>
+                    <input id="checkbox-vegan" name="checkbox-vegan" type="checkbox">
+                    <label for="checkbox-vegan" data-value="VEGAN">Vegan</label>
+                    <input id="checkbox-vege" name="checkbox-vege" type="checkbox">
+                    <label for="checkbox-vege" data-value="VEGE">Vege</label>
+                    <input id="checkbox-casher" name="checkbox-casher" type="checkbox">
+                    <label for="checkbox-casher" data-value="CASHER">Casher</label>
+                    <input id="checkbox-Standart" name="checkbox-Standart" type="checkbox">
+                    <label for="checkbox-Standart" data-value="STANDART">Standart</label>
+                </div>
             </div>
         </div>    
         <div class="my-ipt">
