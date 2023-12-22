@@ -2,8 +2,6 @@ const deconnexionbtnn = document.querySelector(".deconnexionbtn");
 let theCookie = JSON.parse(localStorage.getItem("monCookie"));
 let userId = JSON.parse(localStorage.getItem("monId"));
 const myModifyBtn = document.querySelector(".modify-btn");
-const hide = document.querySelectorAll(".hide");
-let valueOfInput = document.querySelectorAll(".titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue");
 let changes = false;
 
 const header = {
@@ -93,24 +91,13 @@ for(let k = 0; k < eventModifyBtn.length; k++){
     eventModifyBtn[k].addEventListener('click', (event) => {
         event.preventDefault();
 
-        const titleInputValue = document.getElementById("titleValueInput").value;
-        const locValueInput = document.getElementById("locValueInput").value;
-        console.log(titleInputValue);
-        const descriptionValueInput = document.getElementById("descriptionValueInput").value;
-        const inclusivityValueInput = document.getElementById("inclusivityValueInput").value;
         const formData = new FormData(document.getElementById("myForm"));
-        formData.append("title", titleInputValue);
-        formData.append("description", descriptionValueInput);
-        formData.append("address", locValueInput);
-        formData.append("inclusive[]", inclusivityValueInput);
-
         const myEvent = eventModifyBtn[k].parentNode;
         const myEventChildren = myEvent.children;
         // const p = myEventChildren.querySelector()
         if(!changes){
             for (let i = 0; i < myEventChildren.length; i++) {
                 const child = myEventChildren[i];
-                console.log(child);
                 // Vérifie si l'enfant est un <p>, si oui, remplace-le par un <input>
                 if (child.children[2] && child.children[2].tagName === 'P') {
                     child.children[1].classList.remove('hide');
@@ -119,19 +106,30 @@ for(let k = 0; k < eventModifyBtn.length; k++){
                     changes = true;
                 }
             }
+
         } else {
+            let myTab = [];
             for (let i = 0; i < myEventChildren.length; i++) {
                 const child = myEventChildren[i];
                 if (child.children[1] && child.children[1].tagName === 'INPUT'){
+                    // console.log("test 1",child.children[1]);
+                    myTab.push(child.children[1].value);
+                    // console.log("enfant", allMyChild);
+                    
+                    const titleInputValue = child.children[1].value;
                     child.children[1].classList.add('hide');
                     eventModifyBtn[k].textContent = "Modifier mon évènement";
                     changes = false
                 }
                 // Vérifie si l'enfant est un <input>, si oui, remplace-le par un <p>
             }
+            console.log(myTab[0]);
+                    formData.append("title", myTab[0]);
+                    formData.append("address", myTab[1]);
+                    formData.append("description", myTab[2]);
+                    formData.append("inclusive[]", myTab[3]);
         }
         if(eventModifyBtn[k].textContent === "Modifier mon évènement"){
-            console.log(titleInputValue);
             try {
                 fetch(`https://social-gather-production.up.railway.app/event/${eventTab[k].id}`, {
                     method: "PUT",
@@ -141,9 +139,9 @@ for(let k = 0; k < eventModifyBtn.length; k++){
                 .then(response => response.json())
                 .then(json => {
                     console.log(json);
-                    // setTimeout(function(){
-                    //     location.reload();
-                    // }, 3000)
+                    setTimeout(function(){
+                        location.reload();
+                    }, 3000)
                 })
             } catch (error) {
                 console.log(error.message);
@@ -163,10 +161,6 @@ try {
     .then(response => response.json())
     .then(json => {
         console.log(json);
-        // title.innerHTML += `<p>${json[0].title}</p>`;
-        // place.innerHTML += `<p>${json[0].place}</p>`;
-        // date.innerHTML += `<p>${str2}</p>`;
-        // time.innerHTML += `<p>${str}</p>`;
         let buttonList
         let eventModify
         let eventSuppr
@@ -180,14 +174,14 @@ try {
                 const eventElement = document.createElement('div');
                 eventElement.innerHTML = `
                 <div class="container">
-                    <form id="myForm">
+                    <form id="myForm" enctype="multipart/form-data">
                         <div class="event-box">
                             <h2>Titre:</h2>
-                            <input id="titleValueInput" class="hide" type="text"><p name="titleValue" class="titleValue">${json[i].title}</p>
+                            <input class="titleValueInput hide" id="titleValueInput" type="text"><p name="titleValue" class="titleValue">${json[i].title}</p>
                         </div>
                         <div class="event-box">
                             <h2>Lieu:</h2>
-                            <input id="locValueInput" class="hide" type="text"><p class="locValue">${json[i].address}</p>
+                            <input class="locValueInput hide" type="text"><p class="locValue">${json[i].address}</p>
                         </div>
                         <div class="event-box">
                             <h2>Date:</h2>
@@ -199,16 +193,16 @@ try {
                         </div>
                         <div class="event-box">
                             <h2>Description:</h2>
-                            <input id="descriptionValueInput" class="hide" type="text"><p class="descriptionValue">${json[i].description}</p>
+                            <input class="descriptionValueInput hide" type="text"><p class="descriptionValue">${json[i].description}</p>
                         </div>
                         <div class="event-box">
                             <h2>Image:</h2>
                             ${json[i].images.map(image => `<img class="imageOfEvent" src="${image}" alt="image de l'event"></img>
-                            <input class="imageInput hide" type="file">`)}
+                            <input class="imageInput hide" type="file">`).join("")}
                         </div>
                         <div class="event-box">
                             <h2>Inclusivité:</h2>
-                            <input id="inclusivityValueInput" class="hide" type="text"><p class="inclusivityValue">${json[i].inclusive}</p>
+                            <input class="inclusivityValueInput hide" type="text"><p class="inclusivityValue">${json[i].inclusive}</p>
                         </div>
                         <div class="eventSuppr">
                             <button class="the-btn">supprimer l'évènement</button>
