@@ -78,6 +78,7 @@ button.addEventListener("click", async (event) =>     {
     formdata.append('description', eventDescriptionBtn);
     formdata.append('schedule', date);
     formdata.append('address', place);
+    formdata.append('category', mySelector.value);
     for(let i = 0; i < filesArray.length; i++){
         console.log(filesArray[i]);
         formdata.append(`files`, filesArray[i]);
