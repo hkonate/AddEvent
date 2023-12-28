@@ -204,6 +204,10 @@ try {
                             <h2>Inclusivité:</h2>
                             <input class="inclusivityValueInput hide" type="text"><p class="inclusivityValue">${json[i].inclusive}</p>
                         </div>
+                        <div class="event-box">
+                            <h2>Catégorie:</h2>
+                            <p class="categorieValue">${json[i].category}</p>
+                        </div>
                         <div class="eventSuppr">
                             <button class="the-btn">supprimer l'évènement</button>
                         </div>

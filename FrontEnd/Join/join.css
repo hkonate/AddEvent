@@ -98,7 +98,7 @@ button{
     animation: visible 1s forwards;
 }
 
-.titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue{
+.titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue, .categorieValue{
     margin-left: 0; /* Espace entre ":" et la valeur */
     color: black;
     font-family: sans-serif;
