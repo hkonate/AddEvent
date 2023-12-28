@@ -116,7 +116,6 @@ for(let k = 0; k < eventModifyBtn.length; k++){
                     myTab.push(child.children[1].value);
                     // console.log("enfant", allMyChild);
                     
-                    const titleInputValue = child.children[1].value;
                     child.children[1].classList.add('hide');
                     eventModifyBtn[k].textContent = "Modifier mon évènement";
                     changes = false
@@ -127,7 +126,7 @@ for(let k = 0; k < eventModifyBtn.length; k++){
                     formData.append("title", myTab[0]);
                     formData.append("address", myTab[1]);
                     formData.append("description", myTab[2]);
-                    formData.append("inclusive[]", myTab[3]);
+                    // formData.append("inclusive[]", myTab[3]);
         }
         if(eventModifyBtn[k].textContent === "Modifier mon évènement"){
             try {
@@ -139,9 +138,9 @@ for(let k = 0; k < eventModifyBtn.length; k++){
                 .then(response => response.json())
                 .then(json => {
                     console.log(json);
-                    // setTimeout(function(){
-                    //     location.reload();
-                    // }, 3000)
+                    setTimeout(function(){
+                        location.reload();
+                    }, 3000)
                 })
             } catch (error) {
                 console.log(error.message);
@@ -202,7 +201,7 @@ try {
                         </div>
                         <div class="event-box">
                             <h2>Inclusivité:</h2>
-                            <input class="inclusivityValueInput hide" type="text"><p class="inclusivityValue">${json[i].inclusive}</p>
+                            <p class="inclusivityValue">${json[i].inclusive}</p>
                         </div>
                         <div class="event-box">
                             <h2>Catégorie:</h2>
