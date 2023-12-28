@@ -1,17 +1,29 @@
 const button = document.querySelector("#submit-button");
 const form = document.getElementById("container");
 // const deconnectionBtn = document.querySelector(".deconnexionbtn");
+const restaurantSelect = document.getElementById('restaurant');
+const inclusiveInput = document.querySelector(".inclusive-iptt");
+const mySelector = document.getElementById("listOfCategory");
 
 // deconnectionBtn.addEventListener("click", () => {
 //     localStorage.removeItem("monCookie")
 //     window.location = "../mainomain/mainomain.html";
 // })
 
+mySelector.addEventListener('change', () => {
+    if(mySelector.value === "RESTAURANT"){
+        inclusiveInput.classList.remove('hide');
+    }else{
+        inclusiveInput.classList.add('hide');
+    }
+})
+
 document.addEventListener("DOMContentLoaded", function () {
     const addImageButton = document.getElementById("add-img-button");
     addImageButton.addEventListener("click", function (event) {
         event.preventDefault();  // Empêcher le rechargement de la page par défaut
         addImageInput();
+        console.log(mySelector.value);
     });
 });
 

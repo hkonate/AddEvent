@@ -94,3 +94,9 @@ h1{
     padding-top: 40px;
     color: rgba(240, 240, 240, 0.99);
 }
+
+.hide{
+    transform: scale(0);
+    opacity: 0;
+    display: none;
+}
