@@ -4,6 +4,11 @@ const emailInput = document.getElementById("emailInput");
 const passwordInput = document.getElementById("passwordInput");
 const gotomain = document.querySelector(".gotomain");
 
+if(localStorage.getItem('monCookie') && localStorage.getItem('monId')){
+    console.log('redirection');
+    window.location = '../main/index.html';
+}
+
 const seePassword = () => {
     const passwordCheck = document.getElementById("passwordInput");
 
@@ -36,10 +41,9 @@ connectionButton.addEventListener('click', (event) => {
                 }
                 return response.json();
             })
-            .then(text => {
-                console.log(text);
-                localStorage.setItem('monCookie', JSON.stringify(text.authTokens[text.authTokens.length -1]));
-                localStorage.setItem('monId', JSON.stringify(text.id));
+            .then(json => {
+                localStorage.setItem('monCookie', JSON.stringify(json.authTokens[json.authTokens.length -1]));
+                localStorage.setItem('monId', JSON.stringify(json.id));
                 console.log(JSON.parse(localStorage.getItem("monCookie")));
                 console.log(JSON.parse(localStorage.getItem("monId")));
             })

@@ -139,9 +139,9 @@ for(let k = 0; k < eventModifyBtn.length; k++){
                 .then(response => response.json())
                 .then(json => {
                     console.log(json);
-                    setTimeout(function(){
-                        location.reload();
-                    }, 3000)
+                    // setTimeout(function(){
+                    //     location.reload();
+                    // }, 3000)
                 })
             } catch (error) {
                 console.log(error.message);

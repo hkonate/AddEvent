@@ -37,6 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-if(localStorage.getItem("monCookie") === null){
+if(localStorage.getItem("monCookie") === null || localStorage.getItem('monId') === null){
     window.location = "../mainomain/mainomain.html";
 }
