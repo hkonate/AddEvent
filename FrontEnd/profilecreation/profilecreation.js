@@ -2,6 +2,10 @@ const formButton = document.getElementById("formButton");
 const theUserId = JSON.parse(localStorage.getItem("monId"));
 const mytoken = JSON.parse(localStorage.getItem("monCookie"));
 
+if(localStorage.getItem('profilCreated')){
+    window.location = "../user-profile/userprofile.html";
+}
+
 formButton.addEventListener('click', async (event) => {
     event.preventDefault()
 
@@ -34,6 +38,7 @@ formButton.addEventListener('click', async (event) => {
         .then(response => response.json())
         .then(json => {
             console.log(json, "requete bien effectué");
+            localStorage.setItem('profilCreated', true);
             window.location = "../user-profile/userprofile.html"
         })
     } catch (error) {

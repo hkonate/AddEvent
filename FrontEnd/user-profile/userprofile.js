@@ -26,7 +26,9 @@ deconnectionBtn.addEventListener("click", () => {
     
     localStorage.removeItem("monCookie");
     localStorage.removeItem("monId");
-    window.location = "../mainomain/mainomain.html";
+    setTimeout(function(){
+        location.reload();
+    }, 1000)
 })
 
 homeBtn.addEventListener('click', () => {

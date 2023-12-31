@@ -22,8 +22,11 @@ profilButton.addEventListener('click', () => {
 });
 
 deconnexionButton.addEventListener('click', () => {
-    console.log("you are in deconnexion button");
-    window.location = "../mainomain/mainomain.html";
+    localStorage.removeItem("monCookie");
+    localStorage.removeItem("monId");
+    setTimeout(function(){
+            location.reload();
+        }, 1000)
 });
 
 document.addEventListener('DOMContentLoaded', function () {
