@@ -200,6 +200,23 @@ const handleClick = (
   for (let i = 0; i < titleOfEvent.length; i++) {
     titleOfEvent[i].addEventListener("click", (event) => {
       event.preventDefault();
+
+      const isExpanded = container[i].style.height === "1100px";
+
+      for (let j = 0; j < container.length; j++) {
+        container[j].style.height = "3rem";
+        placeInfo[j].classList.remove("fadeIn");
+        dateInfo[j].classList.remove("fadeIn");
+        timeInfo[j].classList.remove("fadeIn");
+        descriptionInfo[j].classList.remove("fadeIn");
+        picInfo[j].classList.remove("fadeIn");
+        inclusiveInfo[j].classList.remove("fadeIn");
+        categoryInfo[j].classList.remove("fadeIn");
+        eventModifyBtn[j].classList.remove("fadeIn");
+        eventSuppBtn[j].classList.remove("fadeIn");
+        buttonList[j].classList.remove("fadeIn");
+      }
+
       if (userId != eventTab[i].creator.id) {
         console.log(eventTab[i].creator.id);
         eventModifyBtn[i].classList.add("hide");
@@ -207,17 +224,19 @@ const handleClick = (
       if (userId === eventTab[i].creator.id) {
         buttonList[i].classList.add("hide");
       }
-      container[i].style.height = "1100px";
-      placeInfo[i].classList.add("fadeIn");
-      dateInfo[i].classList.add("fadeIn");
-      timeInfo[i].classList.add("fadeIn");
-      descriptionInfo[i].classList.add("fadeIn");
-      picInfo[i].classList.add("fadeIn");
-      inclusiveInfo[i].classList.add("fadeIn");
-      categoryInfo[i].classList.add("fadeIn");
-      eventModifyBtn[i].classList.add("fadeIn");
-      eventSuppBtn[i].classList.add("fadeIn");
-      buttonList[i].classList.add("fadeIn");
+      container[i].style.height = isExpanded ? "3rem" : "1100px";
+      if (!isExpanded) {
+        placeInfo[i].classList.add("fadeIn");
+        dateInfo[i].classList.add("fadeIn");
+        timeInfo[i].classList.add("fadeIn");
+        descriptionInfo[i].classList.add("fadeIn");
+        picInfo[i].classList.add("fadeIn");
+        inclusiveInfo[i].classList.add("fadeIn");
+        categoryInfo[i].classList.add("fadeIn");
+        eventModifyBtn[i].classList.add("fadeIn");
+        eventSuppBtn[i].classList.add("fadeIn");
+        buttonList[i].classList.add("fadeIn");
+      }
     });
   }
 };
