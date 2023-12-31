@@ -189,8 +189,8 @@ try {
                 const tab2 = tab[1].split(":");
                 const str = tab2[0] + "h" + tab2[1];
                 const eventElement = document.createElement('div');
+                eventElement.classList.add('container')
                 eventElement.innerHTML = `
-                <div class="container">
                     <form id="myForm" enctype="multipart/form-data">
                         <div class="event-title">
                             
@@ -248,8 +248,7 @@ try {
                         <div class="my-ipt">
                             <button class="the-btn">Je participe</button>
                         </div>
-                    </form>
-                </div>`;
+                    </form>`;
             eventsContainer.appendChild(eventElement);
             buttonList = document.querySelectorAll(".my-ipt button");
             eventModify = document.querySelectorAll(".modify-btn");
