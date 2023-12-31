@@ -3,13 +3,16 @@ let theCookie = JSON.parse(localStorage.getItem("monCookie"));
 let userId = JSON.parse(localStorage.getItem("monId"));
 const myModifyBtn = document.querySelector(".modify-btn");
 let changes = false;
+let container
+    
+// let checkBoxChecked;
 
 const header = {
     "Authorization": `Bearer ${JSON.parse(localStorage.getItem("monCookie"))}`,
     "Content-type": "application/json; charset=UTF-8"
 }
 
-const handleClick = (buttonList, eventTab, eventModifyBtn, eventSuppBtn) => {
+const handleClick = (buttonList, eventTab, eventModifyBtn, eventSuppBtn, titleOfEvent) => {
     for (let i = 0; i < buttonList.length; i++){
         if(userId === eventTab[i].creator.id){
             // console.log("creator");
@@ -112,21 +115,29 @@ for(let k = 0; k < eventModifyBtn.length; k++){
             for (let i = 0; i < myEventChildren.length; i++) {
                 const child = myEventChildren[i];
                 if (child.children[1] && child.children[1].tagName === 'INPUT'){
-                    // console.log("test 1",child.children[1]);
+                    console.log("test 1",child.children[1]);
                     myTab.push(child.children[1].value);
                     // console.log("enfant", allMyChild);
                     
+                    // const checkedBox =  document.querySelectorAll('input[type="checkbox"]:checked');
+                    // checkBoxChecked = Array.from(checkedBox).map(checkbox => {
+                    //     const labelOfCheckbox = document.querySelector(`label[for="${checkbox.id}"]`);
+                    //     return labelOfCheckbox.dataset.value;
+                    // });
+
                     child.children[1].classList.add('hide');
                     eventModifyBtn[k].textContent = "Modifier mon évènement";
                     changes = false
                 }
                 // Vérifie si l'enfant est un <input>, si oui, remplace-le par un <p>
-            }
-            console.log(myTab[0]);
+            } 
                     formData.append("title", myTab[0]);
                     formData.append("address", myTab[1]);
                     formData.append("description", myTab[2]);
-                    // formData.append("inclusive[]", myTab[3]);
+                    // for(let i = 0; i < checkBoxChecked.length; i++){
+                    //     console.log(checkBoxChecked[i]);
+                    //     formData.append("inclusive[]", checkBoxChecked[i]);
+                    // }
         }
         if(eventModifyBtn[k].textContent === "Modifier mon évènement"){
             try {
@@ -138,15 +149,22 @@ for(let k = 0; k < eventModifyBtn.length; k++){
                 .then(response => response.json())
                 .then(json => {
                     console.log(json);
-                    setTimeout(function(){
-                        location.reload();
-                    }, 3000)
+                    // setTimeout(function(){
+                    //     location.reload();
+                    // }, 3000)
                 })
             } catch (error) {
                 console.log(error.message);
                 console.log("l'évènement n'a pas pu être modifié");
             }
         }
+    })
+}
+for (let i = 0; i < titleOfEvent.length; i++) {
+    titleOfEvent[i].addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log(container[i]);
+        container[i].style.height = '1100px';
     })
 }
 }
@@ -159,10 +177,10 @@ try {
     })
     .then(response => response.json())
     .then(json => {
-        console.log(json);
         let buttonList
         let eventModify
         let eventSuppr
+        let eventTitle
         const eventsContainer = document.querySelector(".event");
             for(let i = 0; i < json.length; i++){
                 const tab = json[i].schedule.split("T");
@@ -174,38 +192,54 @@ try {
                 eventElement.innerHTML = `
                 <div class="container">
                     <form id="myForm" enctype="multipart/form-data">
-                        <div class="event-box">
-                            <h2>Titre:</h2>
-                            <input class="titleValueInput hide" id="titleValueInput" type="text"><p name="titleValue" class="titleValue">${json[i].title}</p>
+                        <div class="event-title">
+                            
+                                <h2>Titre:</h2>
+                                <input class="titleValueInput hide" id="titleValueInput" type="text"><p name="titleValue" class="titleValue">${json[i].title}</p>
+                            
                         </div>
-                        <div class="event-box">
-                            <h2>Lieu:</h2>
-                            <input class="locValueInput hide" type="text"><p class="locValue">${json[i].address}</p>
+                        <div class="place">
+                            
+                                <h2>Lieu:</h2>
+                                <input class="locValueInput hide" type="text"><p class="locValue">${json[i].address}</p>
+                            
                         </div>
-                        <div class="event-box">
-                            <h2>Date:</h2>
-                            <p class="dateValue">${str2}</p>
+                        <div class="date">
+                            
+                                <h2>Date:</h2>
+                                <p class="dateValue">${str2}</p>
+                            
                         </div>
-                        <div class="event-box">
-                            <h2>Heure:</h2>
-                            <p class="timeValue">${str}</p>
+                        <div class="time">
+                            
+                                <h2>Heure:</h2>
+                                <p class="timeValue">${str}</p>
+                            
                         </div>
-                        <div class="event-box">
-                            <h2>Description:</h2>
-                            <input class="descriptionValueInput hide" type="text"><p class="descriptionValue">${json[i].description}</p>
+                        <div class="descriptionnn">
+                            
+                                <h2>Description:</h2>
+                                <input class="descriptionValueInput hide" type="text"><p class="descriptionValue">${json[i].description}</p>
+                            
                         </div>
-                        <div class="event-box">
-                            <h2>Image:</h2>
-                            ${json[i].images.map(image => `<img class="imageOfEvent" src="${image}" alt="image de l'event"></img>
-                            <input class="imageInput hide" type="file">`).join("")}
+                        <div class="pic">
+                            
+                                <h2>Image:</h2>
+                                ${json[i].images.map(image => `<img class="imageOfEvent" src="${image}" alt="image de l'event"></img>
+                                <input class="imageInput hide" type="file">`).join("")}
+                            
                         </div>
-                        <div class="event-box">
-                            <h2>Inclusivité:</h2>
-                            <p class="inclusivityValue">${json[i].inclusive}</p>
+                        <div class="inclusivee">
+                            
+                                <h2>Inclusivité:</h2>
+                                <p class="inclusivityValue">${json[i].inclusive}</p>
+                            
                         </div>
-                        <div class="event-box">
-                            <h2>Catégorie:</h2>
-                            <p class="categorieValue">${json[i].category}</p>
+                        <div class="category">
+                            
+                                <h2>Catégorie:</h2>
+                                <p class="categorieValue">${json[i].category}</p>
+                            
                         </div>
                         <div class="eventSuppr">
                             <button class="the-btn">supprimer l'évènement</button>
@@ -220,6 +254,8 @@ try {
             buttonList = document.querySelectorAll(".my-ipt button");
             eventModify = document.querySelectorAll(".modify-btn");
             eventSuppr = document.querySelectorAll(".eventSuppr");
+            eventTitle = document.querySelectorAll(".event-title");
+            container = document.querySelectorAll(".container");
             const checkIfUserIsParticipating = json[i].listOfAttendees.map(ligne => Object.values(ligne).toString()).includes(userId)
             if(checkIfUserIsParticipating){
                 buttonList[i].style.backgroundColor = 'red';
@@ -229,7 +265,7 @@ try {
                 buttonList[i].innerText = "Je participe";
             }
         }
-        handleClick(buttonList, json, eventModify, eventSuppr);
+        handleClick(buttonList, json, eventModify, eventSuppr, eventTitle);
     });
 } catch (error) {
     console.log(error.message);

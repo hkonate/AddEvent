@@ -85,6 +85,7 @@ button.addEventListener("click", async (event) =>     {
     }
     const inclusiveFormDataKey = "inclusive[]";
     for(let i = 0; i < checkBoxChecked.length; i++){
+        console.log(checkBoxChecked[i]);
         formdata.append(inclusiveFormDataKey, checkBoxChecked[i]);
     }
     console.log(JSON.parse(localStorage.getItem("monCookie")));

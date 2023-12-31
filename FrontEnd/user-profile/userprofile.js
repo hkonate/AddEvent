@@ -77,9 +77,9 @@ validBtn.addEventListener('click', (event) => {
     .then(response => response.json())
     .then(json => 
         console.log(json),
-        // setTimeout(function(){
-        //     location.reload();
-        // }, 3000)
+        setTimeout(function(){
+            location.reload();
+        }, 3000)
     )
     } catch (error) {
         console.log(error.message);
@@ -99,19 +99,14 @@ try {
     .then(json => {
         console.log("contenu de la reponse ", json);
         descriptionV.innerText = json.bio;
-        // pseudoV.innerText = json.user.pseudo;
         interestV.innerText = json.hobbies;
         bioInput.value = json.bio;
-        // pseudoInput.value = json.user.pseudo;
         hobbiesInput.value = json.hobbies;
         userProfilePic.src = json.picture;
-        // Vérifiez si une image a été récupérée
         if (json.picture) {
-            // Image récupérée, cachez l'input file
             userProfileInput.classList.add('hide');
             userProfilePic.src = json.picture;
         } else {
-            // Aucune image récupérée, montrez l'input file
             userProfileInput.classList.remove('hide');
         }
     })
