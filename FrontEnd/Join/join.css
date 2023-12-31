@@ -1,43 +1,56 @@
 *{
     margin: 0;
+    box-sizing: border-box;
 }
 
 body{
+    max-width: auto;
     display: flex;
-    justify-content: center;
-    background: rgb(18, 11, 151);
-    background: linear-gradient(90deg, rgba(129, 42, 10, 0.873) 0%, rgba(121, 42, 9, 0.851) 35%, rgb(255, 60, 0) 100%);
+    height: 100vh;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    background-image: url(/AddEvent/FrontEnd/img/sur-la-plage-d-etretat.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .event{
-    width: 100%; /* Ajustez la largeur selon vos besoins */
+    width: 100%;
+    height: 50rem;
     overflow-x: auto;
+    overflow-y: hidden;
     display: flex;
     gap: 30px;
-    flex-wrap: nowrap; /* Les événements ne vont pas à la ligne */
-    justify-content: center;
+    flex-wrap: nowrap; 
+    justify-content: flex-start;
+    align-items: center;
     padding: 10px;
 }
 
 .container{
-    height: 3rem;
-    width: 10rem;
-    background-color: blue;
+    height: 4em;
+    width: 20rem;
     transition: 1s ease-out;
+    backdrop-filter: blur(5px);
+    border: black solid 2px;
 }
 
 h1{
-    margin-bottom: 90px;
-    color: rgba(240, 240, 240, 0.99);
+    margin-bottom: 20px;
+    color: blue;
 }
 
 .event-title{
-    display: flex;
-    padding: 10px;
     cursor: pointer;
+}
+
+.event-title, .place, .date, .time, .descriptionnn, .pic, .inclusivee, .category{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
 }
 
 .fadeIn {
@@ -56,6 +69,9 @@ h1{
     margin-right: 2px;
 }
 
+.btn-for-image{
+    margin-right: 8rem;
+}
 
 
 #dt{
@@ -63,7 +79,7 @@ h1{
     width: 40%;
 }
 
-.my-ipt{
+.my-ipt, .eventSuppr, .event-modify-btn{
     display: flex;
     justify-content: center;
     margin-top: 40px;
@@ -98,25 +114,27 @@ button{
     }
 }
 
+
 .visible{
     animation: visible 1s forwards;
 }
 
-.titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue, .categorieValue{
-    margin-left: 0; /* Espace entre ":" et la valeur */
+.titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue, .categorieValue, .imageOfEvent{
+    margin-left: 2rem;
     color: black;
     font-family: sans-serif;
     font-weight: bold;
 }
 
 .titleValueInput , .locValueInput, .dateValueInput, .timeValueInput, .descriptionValueInput, .inclusivityValueInput{
-    width: auto; /* Par défaut, les champs d'entrée ont une largeur automatique */
+    width: auto;
 }
 
 .imageOfEvent{
-    height: 60px;
+    height: 7rem;
     width: 30%;
     object-fit: cover;
+    object-position: center;
 }
 
 .place, .date, .time, .descriptionnn, .pic, .inclusivee, .category, .eventSuppr, .modify-btn, .the-btn{

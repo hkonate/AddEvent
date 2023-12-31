@@ -14,6 +14,8 @@ let descriptionInfo;
 let picInfo;
 let inclusiveInfo;
 let categoryInfo;
+let btnForImageNotHide;
+let imageOfEveryEvent;
 
 // let checkBoxChecked;
 
@@ -27,7 +29,8 @@ const handleClick = (
   eventTab,
   eventModifyBtn,
   eventSuppBtn,
-  titleOfEvent
+  titleOfEvent,
+  btnForImage
 ) => {
   for (let i = 0; i < buttonList.length; i++) {
     if (userId === eventTab[i].creator.id) {
@@ -201,10 +204,12 @@ const handleClick = (
     titleOfEvent[i].addEventListener("click", (event) => {
       event.preventDefault();
 
-      const isExpanded = container[i].style.height === "1100px";
+      const isExpanded = container[i].style.height === "100%";
+      const width = container[i].style.width === "700%";
 
       for (let j = 0; j < container.length; j++) {
-        container[j].style.height = "3rem";
+        container[j].style.height = "4rem";
+        container[j].style.width === "15rem";
         placeInfo[j].classList.remove("fadeIn");
         dateInfo[j].classList.remove("fadeIn");
         timeInfo[j].classList.remove("fadeIn");
@@ -224,7 +229,8 @@ const handleClick = (
       if (userId === eventTab[i].creator.id) {
         buttonList[i].classList.add("hide");
       }
-      container[i].style.height = isExpanded ? "3rem" : "1100px";
+      container[i].style.height = isExpanded ? "4rem" : "100%";
+      container[i].style.width = width ? "15rem" : "700%";
       if (!isExpanded) {
         placeInfo[i].classList.add("fadeIn");
         dateInfo[i].classList.add("fadeIn");
@@ -238,6 +244,13 @@ const handleClick = (
         buttonList[i].classList.add("fadeIn");
       }
     });
+  }
+  for(let i = 0; i < btnForImage.length; i++){
+    btnForImage[i].addEventListener('click', (event) => {
+        event.preventDefault();
+        console.log("in addevent");
+        imageOfEveryEvent[i].classList.remove('hideForReal');
+    })
   }
 };
 
@@ -261,74 +274,60 @@ try {
         eventElement.innerHTML = `
                     <form id="myForm" enctype="multipart/form-data">
                         <div class="event-title">
-                            
                                 <h2>Titre:</h2>
                                 <input class="titleValueInput hide" id="titleValueInput" type="text"><p name="titleValue" class="titleValue">${
                                   json[i].title
                                 }</p>
-                            
                         </div>
                         <div class="place">
-                            
                                 <h2>Lieu:</h2>
                                 <input class="locValueInput hide" type="text"><p class="locValue">${
                                   json[i].address
                                 }</p>
-                            
                         </div>
                         <div class="date">
-                            
                                 <h2>Date:</h2>
                                 <p class="dateValue">${str2}</p>
-                            
                         </div>
                         <div class="time">
-                            
                                 <h2>Heure:</h2>
                                 <p class="timeValue">${str}</p>
-                            
                         </div>
                         <div class="descriptionnn">
-                            
                                 <h2>Description:</h2>
                                 <input class="descriptionValueInput hide" type="text"><p class="descriptionValue">${
                                   json[i].description
                                 }</p>
-                            
                         </div>
                         <div class="pic">
-                            
                                 <h2>Image:</h2>
                                 ${json[i].images
                                   .map(
                                     (
                                       image
-                                    ) => `<img class="imageOfEvent" src="${image}" alt="image de l'event"></img>
+                                    ) => `<img class="imageOfEvent hideForReal" src="${image}" alt="image de l'event"><input class="btn-for-image" type="button" value="afficher les images"></img>
                                 <input class="imageInput hide" type="file">`
                                   )
                                   .join("")}
-                            
                         </div>
                         <div class="inclusivee">
-                            
                                 <h2>Inclusivité:</h2>
                                 <p class="inclusivityValue">${
                                   json[i].inclusive
                                 }</p>
-                            
                         </div>
                         <div class="category">
-                            
-                                <h2>Catégorie:</h2>
+                            <h2>Catégorie:</h2>
                                 <p class="categorieValue">${
                                   json[i].category
                                 }</p>
-                            
                         </div>
                         <div class="eventSuppr">
                             <button class="the-btn">supprimer l'évènement</button>
                         </div>
+                        <div class="event-modify-btn">
                             <button class="modify-btn">Modifier mon évènement</button>
+                        </div>
                         <div class="my-ipt">
                             <button class="the-btn">Je participe</button>
                         </div>
@@ -346,6 +345,8 @@ try {
         picInfo = document.querySelectorAll(".pic");
         inclusiveInfo = document.querySelectorAll(".inclusivee");
         categoryInfo = document.querySelectorAll(".category");
+        btnForImageNotHide = document.querySelectorAll(".btn-for-image");
+        imageOfEveryEvent = document.querySelectorAll(".imageOfEvent");
         const checkIfUserIsParticipating = json[i].listOfAttendees
           .map((ligne) => Object.values(ligne).toString())
           .includes(userId);
@@ -357,7 +358,7 @@ try {
           buttonListe[i].innerText = "Je participe";
         }
       }
-      handleClick(buttonListe, json, eventModify, eventSuppr, eventTitle);
+      handleClick(buttonListe, json, eventModify, eventSuppr, eventTitle, btnForImageNotHide);
     });
 } catch (error) {
   console.log(error.message);
