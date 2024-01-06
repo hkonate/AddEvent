@@ -204,12 +204,12 @@ const handleClick = (
     titleOfEvent[i].addEventListener("click", (event) => {
       event.preventDefault();
 
-      const isExpanded = container[i].style.height === "100%";
-      const width = container[i].style.width === "700%";
+      const isExpanded = container[i].style.height === "110%";
+      const width = container[i].style.width === "auto";
 
       for (let j = 0; j < container.length; j++) {
         container[j].style.height = "4rem";
-        container[j].style.width === "15rem";
+        container[j].style.width === "20rem";
         placeInfo[j].classList.remove("fadeIn");
         dateInfo[j].classList.remove("fadeIn");
         timeInfo[j].classList.remove("fadeIn");
@@ -229,14 +229,18 @@ const handleClick = (
       if (userId === eventTab[i].creator.id) {
         buttonList[i].classList.add("hide");
       }
-      container[i].style.height = isExpanded ? "4rem" : "100%";
-      container[i].style.width = width ? "15rem" : "700%";
+      container[i].style.height = isExpanded ? "4rem" : "110%";
+      container[i].style.width = width ? "20rem" : "auto";
       if (!isExpanded) {
         placeInfo[i].classList.add("fadeIn");
         dateInfo[i].classList.add("fadeIn");
         timeInfo[i].classList.add("fadeIn");
         descriptionInfo[i].classList.add("fadeIn");
-        picInfo[i].classList.add("fadeIn");
+        if(eventTab[i].images.length === 0){
+          picInfo[i].classList.add("hide");
+        }else{
+          picInfo[i].classList.add("fadeIn");
+        }
         if(eventTab[i].inclusive.length === 0){
           inclusiveInfo[i].classList.add('hide')
         }else{
@@ -253,7 +257,7 @@ const handleClick = (
     btnForImage[i].addEventListener("click", (event) => {
       event.preventDefault();
       console.log("in addevent");
-      imageOfEveryEvent[i].classList.remove("hideForReal");
+      imageOfEveryEvent.forEach(img => img.classList.remove("hideForReal"));
     });
   }
 };
@@ -306,14 +310,17 @@ try {
                         </div>
                         <div class="pic">
                                 <h2>Image:</h2>
+                                <div class="myImages">
                                 ${json[i].images
                                   .map(
                                     (
                                       image
-                                    ) => `<img class="imageOfEvent hideForReal" src="${image}" alt="image de l'event"><input class="btn-for-image" type="button" value="afficher les images"></img>
+                                    ) => `<img class="imageOfEvent hideForReal" src="${image}" alt="image de l'event"></img>
                                 <input class="imageInput hide" type="file">`
                                   )
                                   .join("")}
+                                  <input class="btn-for-image" type="button" value="afficher les images">
+                                </div>
                         </div>
                         <div class="inclusivee">
                                 <h2>Inclusivité:</h2>

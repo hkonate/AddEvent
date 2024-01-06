@@ -17,8 +17,8 @@ body{
 }
 
 .event{
-    width: 100%;
-    height: 50rem;
+    width: 90rem;
+    height: 60rem;
     overflow-x: auto;
     overflow-y: hidden;
     display: flex;
@@ -35,11 +35,17 @@ body{
     transition: 1s ease-out;
     backdrop-filter: blur(5px);
     border: black solid 2px;
+    padding-top: 2px;
 }
 
 h1{
     margin-bottom: 20px;
     color: blue;
+}
+
+.myImages{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .event-title{
@@ -119,11 +125,15 @@ button{
     animation: visible 1s forwards;
 }
 
-.titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue, .categorieValue, .imageOfEvent{
+.titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue, .categorieValue, .imageOfEvent, .eventCreator{
     margin-left: 2rem;
     color: black;
     font-family: sans-serif;
     font-weight: bold;
+}
+
+.imageOfEvent{
+    margin-left: 0.5rem;
 }
 
 .titleValueInput , .locValueInput, .dateValueInput, .timeValueInput, .descriptionValueInput, .inclusivityValueInput{
