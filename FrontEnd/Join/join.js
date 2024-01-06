@@ -237,7 +237,11 @@ const handleClick = (
         timeInfo[i].classList.add("fadeIn");
         descriptionInfo[i].classList.add("fadeIn");
         picInfo[i].classList.add("fadeIn");
-        inclusiveInfo[i].classList.add("fadeIn");
+        if(eventTab[i].inclusive.length === 0){
+          inclusiveInfo[i].classList.add('hide')
+        }else{
+          inclusiveInfo[i].classList.add("fadeIn");
+        }
         categoryInfo[i].classList.add("fadeIn");
         eventModifyBtn[i].classList.add("fadeIn");
         eventSuppBtn[i].classList.add("fadeIn");
@@ -245,12 +249,12 @@ const handleClick = (
       }
     });
   }
-  for(let i = 0; i < btnForImage.length; i++){
-    btnForImage[i].addEventListener('click', (event) => {
-        event.preventDefault();
-        console.log("in addevent");
-        imageOfEveryEvent[i].classList.remove('hideForReal');
-    })
+  for (let i = 0; i < btnForImage.length; i++) {
+    btnForImage[i].addEventListener("click", (event) => {
+      event.preventDefault();
+      console.log("in addevent");
+      imageOfEveryEvent[i].classList.remove("hideForReal");
+    });
   }
 };
 
@@ -261,6 +265,7 @@ try {
   })
     .then((response) => response.json())
     .then((json) => {
+      console.log(json);
       let eventTitle;
       const eventsContainer = document.querySelector(".event");
       for (let i = 0; i < json.length; i++) {
@@ -325,6 +330,9 @@ try {
                         <div class="eventSuppr">
                             <button class="the-btn">supprimer l'évènement</button>
                         </div>
+                        <div class="eventCreator">
+                          <p>Crée par : ${json[i].creator.pseudo}</p>
+                        </div>
                         <div class="event-modify-btn">
                             <button class="modify-btn">Modifier mon évènement</button>
                         </div>
@@ -358,7 +366,14 @@ try {
           buttonListe[i].innerText = "Je participe";
         }
       }
-      handleClick(buttonListe, json, eventModify, eventSuppr, eventTitle, btnForImageNotHide);
+      handleClick(
+        buttonListe,
+        json,
+        eventModify,
+        eventSuppr,
+        eventTitle,
+        btnForImageNotHide
+      );
     });
 } catch (error) {
   console.log(error.message);
