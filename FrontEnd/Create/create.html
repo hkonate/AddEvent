@@ -11,19 +11,21 @@
     <h1>Créer mon évènement</h1>
     <form  id="container">
         <div class="event-box">
-            <label for="listOfCategory">Choisis une catégorie:</label>
-            <select name="listOfCategory" id="listOfCategory">
-                <option value="">Choisissez votre catégorie</option>
-                <option id="CONCERT" value="CONCERT">Concert</option>
-                <option value="KARAOKE">Karaoke</option>
-                <option id="restaurant" value="RESTAURANT">Restaurant</option>
-                <option value="GAMING">Jeux</option>
-                <option value="SPORT">Sport</option>
-                <option value="MOVIE">Films</option>
-                <option value="STUDY">Études</option>
-                <option value="ART">Art</option>
-                <option value="OTHERS">Autres</option>
-            </select>
+            <div class="theSelector">
+                <label for="listOfCategory">Choisis une catégorie:</label>
+                <select name="listOfCategory" id="listOfCategory">
+                    <option value="">Choisissez votre catégorie</option>
+                    <option id="CONCERT" value="CONCERT">Concert</option>
+                    <option value="KARAOKE">Karaoke</option>
+                    <option id="restaurant" value="RESTAURANT">Restaurant</option>
+                    <option value="GAMING">Jeux</option>
+                    <option value="SPORT">Sport</option>
+                    <option value="MOVIE">Films</option>
+                    <option value="STUDY">Études</option>
+                    <option value="ART">Art</option>
+                    <option value="OTHERS">Autres</option>
+                </select>
+            </div>
             <div class="title">
                 <h2>Titre:</h2>
                 <input id="text" type="text">
@@ -40,10 +42,10 @@
                 <h2>Description:</h2>
                 <input class="ipt-of-event-description" type="text">
             </div>
-            <button id="add-img-button">Ajouter une image</button>
+            <input type="button" value="Ajouter une image" id="add-img-button">
             <div class="image-of-event">
                 <h2>Images:</h2>
-                <div class="imageinput">
+                <div class="imageInput">
                     <input class="ipt-of-event-image" type="file" accept="image/*" multiple>
                 </div>
             </div>

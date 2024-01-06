@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Fonction pour ajouter un nouveau champ d'entrée d'image
 function addImageInput() {
-    const imageContainer = document.querySelector(".image-of-event");
+    const imageContainer = document.querySelector(".imageInput");
 
     // Création d'un nouvel élément input de type fichier
     const newInput = document.createElement("input");

@@ -95,6 +95,7 @@ h1{
 button{
     background-color: rgb(69, 177, 230);
     height: 22px;
+    margin-top: -2rem;
     cursor: pointer;
     border: none;
     border-radius: 6px;
