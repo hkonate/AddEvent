@@ -16,6 +16,7 @@ let inclusiveInfo;
 let categoryInfo;
 let btnForImageNotHide;
 let imageOfEveryEvent;
+let eventCreator;
 
 // let checkBoxChecked;
 
@@ -130,7 +131,9 @@ const handleClick = (
 
       const formData = new FormData(document.getElementById("myForm"));
       const myEvent = eventModifyBtn[k].parentNode;
-      const myEventChildren = myEvent.children;
+      const myRealEvent = myEvent.parentNode
+      console.log(myRealEvent);
+      const myEventChildren = myRealEvent.children;
       // const p = myEventChildren.querySelector()
       if (!changes) {
         for (let i = 0; i < myEventChildren.length; i++) {
@@ -204,7 +207,7 @@ const handleClick = (
     titleOfEvent[i].addEventListener("click", (event) => {
       event.preventDefault();
 
-      const isExpanded = container[i].style.height === "110%";
+      const isExpanded = container[i].style.height === "100%";
       const width = container[i].style.width === "auto";
 
       for (let j = 0; j < container.length; j++) {
@@ -217,6 +220,7 @@ const handleClick = (
         picInfo[j].classList.remove("fadeIn");
         inclusiveInfo[j].classList.remove("fadeIn");
         categoryInfo[j].classList.remove("fadeIn");
+        eventCreator[j].classList.remove('fadeIn')
         eventModifyBtn[j].classList.remove("fadeIn");
         eventSuppBtn[j].classList.remove("fadeIn");
         buttonList[j].classList.remove("fadeIn");
@@ -229,7 +233,7 @@ const handleClick = (
       if (userId === eventTab[i].creator.id) {
         buttonList[i].classList.add("hide");
       }
-      container[i].style.height = isExpanded ? "4rem" : "110%";
+      container[i].style.height = isExpanded ? "4rem" : "100%";
       container[i].style.width = width ? "20rem" : "auto";
       if (!isExpanded) {
         placeInfo[i].classList.add("fadeIn");
@@ -247,8 +251,11 @@ const handleClick = (
           inclusiveInfo[i].classList.add("fadeIn");
         }
         categoryInfo[i].classList.add("fadeIn");
+        eventCreator[i].classList.add('fadeIn');
         eventModifyBtn[i].classList.add("fadeIn");
-        eventSuppBtn[i].classList.add("fadeIn");
+        if(userId === eventTab[i].creator.id){
+          eventSuppBtn[i].classList.add("fadeIn");
+        }
         buttonList[i].classList.add("fadeIn");
       }
     });
@@ -256,7 +263,7 @@ const handleClick = (
   for (let i = 0; i < btnForImage.length; i++) {
     btnForImage[i].addEventListener("click", (event) => {
       event.preventDefault();
-      console.log("in addevent");
+      console.log("dans l'affichage d'image");
       imageOfEveryEvent.forEach(img => img.classList.remove("hideForReal"));
     });
   }
@@ -334,11 +341,11 @@ try {
                                   json[i].category
                                 }</p>
                         </div>
-                        <div class="eventSuppr">
-                            <button class="the-btn">supprimer l'évènement</button>
-                        </div>
                         <div class="eventCreator">
-                          <p>Crée par : ${json[i].creator.pseudo}</p>
+                          <p class="eventCreatorValue">Crée par : ${json[i].creator.pseudo}</p>
+                        </div>
+                        <div class="eventSuppr">
+                            <button class="the-supp-btn">supprimer l'évènement</button>
                         </div>
                         <div class="event-modify-btn">
                             <button class="modify-btn">Modifier mon évènement</button>
@@ -350,7 +357,7 @@ try {
         eventsContainer.appendChild(eventElement);
         buttonListe = document.querySelectorAll(".my-ipt button");
         eventModify = document.querySelectorAll(".modify-btn");
-        eventSuppr = document.querySelectorAll(".eventSuppr");
+        eventSuppr = document.querySelectorAll(".the-supp-btn");
         eventTitle = document.querySelectorAll(".event-title");
         container = document.querySelectorAll(".container");
         placeInfo = document.querySelectorAll(".place");
@@ -362,6 +369,7 @@ try {
         categoryInfo = document.querySelectorAll(".category");
         btnForImageNotHide = document.querySelectorAll(".btn-for-image");
         imageOfEveryEvent = document.querySelectorAll(".imageOfEvent");
+        eventCreator = document.querySelectorAll(".eventCreator");
         const checkIfUserIsParticipating = json[i].listOfAttendees
           .map((ligne) => Object.values(ligne).toString())
           .includes(userId);

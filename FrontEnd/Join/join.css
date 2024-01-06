@@ -52,11 +52,12 @@ h1{
     cursor: pointer;
 }
 
-.event-title, .place, .date, .time, .descriptionnn, .pic, .inclusivee, .category{
+.event-title, .place, .date, .time, .descriptionnn, .pic, .inclusivee, .category, .eventCreator{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 1rem;
+    margin: 1rem;
+    padding-top: -2rem;
 }
 
 .fadeIn {
@@ -125,7 +126,7 @@ button{
     animation: visible 1s forwards;
 }
 
-.titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue, .categorieValue, .imageOfEvent, .eventCreator{
+.titleValue, .locValue, .dateValue, .timeValue, .descriptionValue, .inclusivityValue, .categorieValue, .imageOfEvent, .eventCreatorValue{
     margin-left: 2rem;
     color: black;
     font-family: sans-serif;
@@ -147,7 +148,7 @@ button{
     object-position: center;
 }
 
-.place, .date, .time, .descriptionnn, .pic, .inclusivee, .category, .eventSuppr, .modify-btn, .the-btn{
+.place, .date, .time, .descriptionnn, .pic, .inclusivee, .category, .the-supp-btn, .modify-btn, .the-btn, .eventCreator{
     scale: 0;
     opacity: 0;
 }
